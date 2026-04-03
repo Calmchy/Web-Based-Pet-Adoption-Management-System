@@ -1,0 +1,58 @@
+.auth-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.auth-bg-blob--1 {
+    width: 340px; height: 340px;
+    background: radial-gradient(circle, #f39c12 0%, transparent 70%);
+    top: -80px; right: -80px;
+    opacity: .15;
+}
+
+.auth-bg-blob--2 {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, #3498db 0%, transparent 70%);
+    bottom: -60px; left: -60px;
+    opacity: .12;
+}
+
+.auth-card {
+    position: relative;
+    z-index: 1;
+}
+
+.auth-brand-icon {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: .5rem;
+    line-height: 1;
+}
+
+.auth-header h2 {
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -.4px;
+}
+
+.btn-primary.btn-full {
+    margin-top: 1rem;
+    letter-spacing: .02em;
+}
+
+/* ############ Password strength bar ############ */
+.pw-strength {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 6px;
+    transition: width .3s, background .3s;
+    width: 0;
+}
