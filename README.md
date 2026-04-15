@@ -81,4 +81,4 @@ The following steps are completed **onsite at the adoption center**:
 
 ---
 
-## 📊 System Concept
+
