@@ -1,0 +1,11 @@
+<footer>
+    <div>
+        <h2>Test</h2>
+    </div>
+    <div>
+        <h2>Test</h2>
+    </div>
+    <div>
+        <h2>Test</h2>
+    </div>
+</footer>
