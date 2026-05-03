@@ -14,10 +14,12 @@
     <div class="auth-bg-blob auth-bg-blob--2"></div>
     <div class="auth-card">
         <div class="auth-brand-icon">🐾</div>
+
         <div class="auth-header">
             <h2>Create Account</h2>
             <p>Join AdoptME and find your perfect companion</p>
         </div>
+
         <?php if (!empty($errors)): ?>
             <div class="alert alert-error">
                 <ul>
@@ -27,7 +29,9 @@
                 </ul>
             </div>
         <?php endif; ?>
+
         <form action="actions/register_action.php" method="POST" enctype="multipart/form-data" class="auth-form">
+            <!-- ############ Profile Photo ############ -->
             <fieldset>
                 <legend>🖼️ Profile Photo</legend>
                 <div class="form-group">
@@ -44,6 +48,8 @@
                     </div>
                 </div>
             </fieldset>
+
+            <!-- ############ Personal Information ############ -->
             <fieldset>
                 <legend>👤 Personal Information</legend>
                 <div class="form-row-3">
@@ -81,6 +87,8 @@
                     </div>
                 </div>
             </fieldset>
+
+            <!-- ############ Address ############ -->
             <fieldset>
                 <legend>📍 Address</legend>
                 <div class="form-row">
@@ -134,6 +142,8 @@
                     </div>
                 </div>
             </fieldset>
+
+            <!-- ############ Password ############ -->
             <fieldset>
                 <legend>🔒 Password</legend>
                 <div class="form-row">
@@ -157,121 +167,18 @@
                     </div>
                 </div>
             </fieldset>
+
             <button type="submit" class="btn-primary btn-full">
                 Create My Account &rarr;
             </button>
         </form>
+
         <p class="auth-switch">
             Already have an account? <a href="index.php?page=login">Sign in here</a>
         </p>
     </div>
 </main>
 
-<style>
-.auth-wrapper {
-    position: relative;
-    overflow: hidden;
-}
+<link rel="stylesheet" href="../assets/css/register.css">
 
-.auth-bg-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.auth-bg-blob--1 {
-    width: 340px; height: 340px;
-    background: radial-gradient(circle, #f39c12 0%, transparent 70%);
-    top: -80px; right: -80px;
-    opacity: .15;
-}
-
-.auth-bg-blob--2 {
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, #3498db 0%, transparent 70%);
-    bottom: -60px; left: -60px;
-    opacity: .12;
-}
-
-.auth-card {
-    position: relative;
-    z-index: 1;
-}
-
-.auth-brand-icon {
-    text-align: center;
-    font-size: 2.4rem;
-    margin-bottom: .5rem;
-    line-height: 1;
-}
-
-.auth-header h2 {
-    font-size: 1.55rem;
-    font-weight: 800;
-    letter-spacing: -.4px;
-}
-
-.btn-primary.btn-full {
-    margin-top: 1rem;
-    letter-spacing: .02em;
-}
-
-/* Password strength bar */
-.pw-strength {
-    height: 4px;
-    border-radius: 2px;
-    margin-top: 6px;
-    transition: width .3s, background .3s;
-    width: 0;
-}
-</style>
-
-<script>
-    // Toggle password visibility
-    document.querySelectorAll('.toggle-pw').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const input = document.getElementById(btn.dataset.target);
-            input.type = input.type === 'password' ? 'text' : 'password';
-            btn.textContent = input.type === 'password' ? '👁' : '🙈';
-        });
-    });
-
-    // Profile image live preview
-    document.getElementById('profile_image').addEventListener('change', function () {
-        const file = this.files[0];
-        if (!file) return;
-        if (file.size > 2 * 1024 * 1024) {
-            alert('Image must be 2MB or less.');
-            this.value = '';
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = e => document.getElementById('avatarPreview').src = e.target.result;
-        reader.readAsDataURL(file);
-    });
-
-    // Password strength meter
-    const pwInput    = document.getElementById('password');
-    const strengthEl = document.getElementById('pwStrength');
-    const colors     = ['#ef4444', '#f97316', '#eab308', '#22c55e'];
-    const labels     = ['Weak', 'Fair', 'Good', 'Strong'];
-
-    pwInput.addEventListener('input', () => {
-        const v = pwInput.value;
-        let score = 0;
-        if (v.length >= 8)              score++;
-        if (/[A-Z]/.test(v))            score++;
-        if (/[0-9]/.test(v))            score++;
-        if (/[^A-Za-z0-9]/.test(v))     score++;
-        if (v.length === 0) {
-            strengthEl.style.width = '0';
-            strengthEl.title = '';
-        } else {
-            strengthEl.style.width  = ((score / 4) * 100) + '%';
-            strengthEl.style.background = colors[score - 1] || '#ef4444';
-            strengthEl.title = labels[score - 1] || '';
-        }
-    });
-</script>
+<script src="../assets/js/register.js"></script>
