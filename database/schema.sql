@@ -1,6 +1,6 @@
--- Phase 3: Database Implementation
--- AdoptME: Web-Based Pet Adoption Management System
--- Submitted by: Chyril S. Manatad | Reynaldo F. Balais
+-- phase 3: database implementation
+-- adoptme: web-based pet adoption management system
+-- submitted by: chyril s. manatad | reynaldo f. balais
 
 create database adoptme;
 
@@ -14,9 +14,17 @@ last_name varchar(50) not null,
 email varchar(100) not null unique,
 password varchar(255) not null,
 phone_number varchar(20),
-role enum('admin', 'adopter') not null,
+role enum('admin', 'adopter') not null default 'adopter',
 profile_image varchar(255),
 created_at timestamp default current_timestamp
+);
+
+create table address (
+address_id int auto_increment primary key,
+user_id int not null,
+brgy_or_street varchar(100) not null,
+municipality varchar(100) not null,
+foreign key (user_id) references users(user_id) on delete cascade
 );
 
 create table categories (
@@ -39,21 +47,23 @@ gender enum('male', 'female'),
 description text,
 status enum('available', 'pending', 'adopted') default 'available',
 breed_id int,
+created_by int,
 created_at timestamp default current_timestamp,
-foreign key (breed_id) references breeds(breed_id) on delete set null on update cascade
+foreign key (breed_id) references breeds(breed_id) on delete set null on update cascade,
+foreign key (created_by) references users(user_id) on delete set null on update cascade
 );
 
 create table pet_images (
 image_id int auto_increment primary key,
-pet_id int,
+pet_id int not null,
 image_path varchar(255),
 foreign key (pet_id) references pets(pet_id) on delete cascade on update cascade
 );
 
 create table applications (
 application_id int auto_increment primary key,
-user_id int,
-pet_id int,
+user_id int not null,
+pet_id int not null,
 message text,
 status enum('pending', 'approved', 'rejected') default 'pending',
 applied_at timestamp default current_timestamp,
