@@ -13,11 +13,11 @@
 ?>
 
 <main class="auth-wrapper">
-    <!-- Decorative background blobs -->
+    <!-- ############ Decorative background blobs ############ -->
     <div class="auth-bg-blob auth-bg-blob--1"></div>
     <div class="auth-bg-blob auth-bg-blob--2"></div>
     <div class="auth-card auth-card--sm">
-        <!-- Paw icon header -->
+        <!-- ############ Paw icon header ############ -->
         <div class="auth-brand-icon">🐾</div>
         <div class="auth-header">
             <h2>Welcome Back</h2>
@@ -60,7 +60,7 @@
 </main>
 
 <style>
-/* ── Extra login page polish ─── */
+/* ############ Extra login page polish ############ */
 .auth-wrapper {
     position: relative;
     overflow: hidden;
@@ -112,7 +112,7 @@
     letter-spacing: -.4px;
 }
 
-/* Icon-wrapped inputs */
+/* ############ Icon-wrapped inputs ############ */
 .input-icon-wrap {
     position: relative;
     display: flex;
@@ -132,14 +132,14 @@
     padding-left: 2.6rem !important;
 }
 
-/* Password field with icon */
+/* ############ Password field with icon ############ */
 .input-password.input-icon-wrap input {
     border: none;
     padding-left: 2.6rem !important;
     padding-right: .5rem;
 }
 
-/* Divider */
+/* ############ Divider ############ */
 .auth-divider {
     display: flex;
     align-items: center;
