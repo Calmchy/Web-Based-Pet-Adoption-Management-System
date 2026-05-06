@@ -1,7 +1,7 @@
 <header>
 <nav class="navbar">
 
-    <!-- LEFT: Logo + Desktop Links -->
+    <!-- ############ LEFT: Logo + Desktop Links ############ -->
     <div class="nav-left">
         <div class="brand-container">
             <img class="logo" src="assets/images/logo.png" alt="AdoptME Logo">
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <!-- RIGHT: Dark mode + Auth (desktop) -->
+    <!-- ############ RIGHT: Dark mode + Auth (desktop) ############ -->
     <div class="nav-right">
         <?php if (isset($_SESSION['user_id'])): ?>
         <div class="nav-notif" style="position:relative;">
@@ -73,7 +73,7 @@
         <?php endif; ?>
     </div>
 
-    <!-- Hamburger (mobile only) -->
+    <!-- ############ Hamburger (mobile only) ############ -->
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
         <span></span>
         <span></span>
@@ -82,13 +82,13 @@
 
 </nav>
 
-<!-- Mobile Drawer -->
+<!-- ############ Mobile Drawer ############ -->
 <div class="nav-drawer" id="navDrawer">
     <a href="index.php?page=home">🏠 Home</a>
     <a href="index.php?page=pets">🐾 Pets</a>
     <a href="index.php?page=apply">📋 Apply</a>
     <a href="index.php?page=about">ℹ️ About</a>
-    <!-- Dark mode toggle in drawer -->
+    <!-- ############ Dark mode toggle in drawer ############ -->
     <button id="darkModeBtnDrawer" style="
         background:none; border:none; color:#dcdde1; font-size:.95rem;
         font-weight:600; padding:10px 14px; border-radius:8px; cursor:pointer;
@@ -122,7 +122,7 @@
         btn.setAttribute('aria-expanded', open);
     });
 
-    // Close drawer when a link is tapped
+    // ############ Close drawer when a link is tapped ############
     drawer.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
             drawer.classList.remove('open');
@@ -130,7 +130,7 @@
         });
     });
 
-    // Close on outside click
+    // ############ Close on outside click ############
     document.addEventListener('click', e => {
         if (!btn.contains(e.target) && !drawer.contains(e.target)) {
             drawer.classList.remove('open');
@@ -138,7 +138,7 @@
         }
     });
 
-    // Dark mode — sync both buttons (topbar + drawer)
+    // ############ Dark mode — sync both buttons (topbar + drawer) ############
     const dmMain   = document.getElementById('darkModeBtn');
     const dmDrawer = document.getElementById('darkModeBtnDrawer');
 
@@ -150,13 +150,13 @@
         if (dmDrawer) dmDrawer.textContent = icon + ' Dark Mode';
     }
 
-    // Load saved preference
+    // ############ Load saved preference ############
     applyDark(localStorage.getItem('theme') === 'dark');
 
     if (dmMain)   dmMain.addEventListener('click',   () => applyDark(!document.body.classList.contains('dark-mode')));
     if (dmDrawer) dmDrawer.addEventListener('click', () => applyDark(!document.body.classList.contains('dark-mode')));
 
-    // Navbar notification bell
+    // ############ Navbar notification bell ############
     const navNotifBtn      = document.getElementById('navNotifBtn');
     const navNotifDropdown = document.getElementById('navNotifDropdown');
     const navMarkAll       = document.getElementById('navMarkAllRead');
