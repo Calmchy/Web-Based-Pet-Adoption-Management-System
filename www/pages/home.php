@@ -1,6 +1,6 @@
 <div class="container">
 
-    <!-- HERO SECTION -->
+    <!-- ############ HERO SECTION ############ -->
     <div class="hero">
         <h1>Welcome to AdoptMe 🐾</h1>
         <p>Find your perfect companion and give pets a loving home.</p>
@@ -8,7 +8,7 @@
         <a href="index.php?page=pets" class="btn">Browse Pets</a>
     </div>
 
-    <!-- FEATURES -->
+    <!-- ############ FEATURES ############ -->
     <div class="cards">
 
         <div class="card">
