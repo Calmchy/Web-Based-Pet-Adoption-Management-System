@@ -1,8 +1,7 @@
 <?php
 $pets = [];
 $q = $conn->query("
-    SELECT p.pet_id, p.name, p.age, p.gender, p.description, p.status,
-           b.breed_name, c.category_name,
+    SELECT p.pet_id, p.name, p.age, p.gender, p.description, p.status, b.breed_name, c.category_name,
            (SELECT image_path FROM pet_images WHERE pet_id = p.pet_id LIMIT 1) AS image_path
     FROM pets p
     LEFT JOIN breeds b     ON b.breed_id    = p.breed_id
@@ -29,7 +28,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
             <?php foreach ($pets as $pet): ?>
                 <div class="pet-card" data-id="<?= $pet['pet_id'] ?>">
 
-                    <!-- Image -->
+                    <!-- ############ Image ############ -->
                     <div class="pet-card__img">
                         <?php if ($pet['image_path']): ?>
                             <img src="<?= htmlspecialchars($pet['image_path']) ?>"
@@ -42,7 +41,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
                         </span>
                     </div>
 
-                    <!-- Info -->
+                    <!-- ############ Info ############ -->
                     <div class="pet-card__body">
                         <h3 class="pet-card__name"><?= htmlspecialchars($pet['name']) ?></h3>
                         <p class="pet-card__meta">
@@ -76,7 +75,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
     <?php endif; ?>
 </main>
 
-<!-- Pet Detail Modal -->
+<!-- ############ Pet Detail Modal ############ -->
 <div class="pet-modal-overlay" id="petModalOverlay" onclick="closePetModal()"></div>
 <div class="pet-modal" id="petModal">
     <button class="pet-modal__close" onclick="closePetModal()">✕</button>
@@ -98,7 +97,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <style>
-/* ── Pets Page ─────────────────────────────────────────── */
+/* ############ Pets Page ############ */
 .pets-page {
     max-width: 1100px;
     margin: 0 auto;
@@ -115,14 +114,14 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
 }
 .pets-empty span { font-size: 3rem; display: block; margin-bottom: 12px; }
 
-/* ── Grid ──────────────────────────────────────────────── */
+/* ############ Grid ############ */
 .pets-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
 }
 
-/* ── Card ──────────────────────────────────────────────── */
+/* ############ Card ############ */
 .pet-card {
     background: var(--card-bg, #1e2a3a);
     border-radius: 14px;
@@ -248,7 +247,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
 .btn-adopt:hover { background: #2563eb; }
 .btn-adopt--full { display: block; text-align: center; padding: 12px; font-size: .95rem; border-radius: 10px; }
 
-/* ── Modal ─────────────────────────────────────────────── */
+/* ############ Modal ############ */
 .pet-modal-overlay {
     display: none;
     position: fixed; inset: 0;
@@ -341,7 +340,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
     margin-bottom: 20px;
 }
 
-/* ── Responsive ────────────────────────────────────────── */
+/* ############ Responsive ############ */
 @media (max-width: 600px) {
     .pets-page { padding: 20px 14px 40px; }
     .pets-grid { grid-template-columns: 1fr; gap: 14px; }
@@ -374,7 +373,7 @@ function openPetModal(pet) {
     }
 
     overlay.classList.add('open');
-    // Small delay so display:block kicks in before transition
+    // ############ Small delay so display:block kicks in before transition ############
     requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
     document.body.style.overflow = 'hidden';
 }
