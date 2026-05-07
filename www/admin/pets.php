@@ -6,12 +6,12 @@ require_once "../includes/auth.php";
 
 require_role('admin');
 
-// ── Handle status flash messages ──────────────────────────────────────────
+// ############ Handle status flash messages ############
 $flash_success = $_SESSION['admin_success'] ?? null;
 $flash_error = $_SESSION['admin_error'] ?? null;
 unset($_SESSION['admin_success'], $_SESSION['admin_error']);
 
-// ── Fetch all pets ────────────────────────────────────────────────────────
+// ############ Fetch all pets ############
 $pets = [];
 $q = $conn->query("
     SELECT p.pet_id, p.name, p.age, p.gender, p.status, p.created_at, b.breed_name, c.category_name
@@ -25,7 +25,7 @@ if ($q) $pets = $q->fetch_all(MYSQLI_ASSOC);
 $admin_name = ($_SESSION['first_name'] ?? '') . ' ' . ($_SESSION['last_name'] ?? '');
 $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
 
-// ── Pending count for sidebar badge ───────────────────────────────────────
+// ############ Pending count for sidebar badge ############
 $pending_count = 0;
 $q = $conn->query("SELECT COUNT(*) as c FROM applications WHERE status = 'pending'");
 if ($q) $pending_count = $q->fetch_assoc()['c'];
