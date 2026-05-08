@@ -106,7 +106,7 @@ echo.
 call :check_compose
 docker compose ps
 echo.
-docker stats --no-stream --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.Status}}"
+docker stats --no-stream
 echo.
 pause
 goto menu
