@@ -90,9 +90,10 @@ The following steps are still completed **onsite at the adoption center:**
 | Layer | Technology |
 |-------|-----------|
 | **Frontend** | HTML, CSS, JavaScript |
-| **Backend** | PHP |
-| **Database** | MariaDB |
-| **Environment** | XAMPP |
+| **Backend** | PHP 8.3 (Apache) |
+| **Database** | MariaDB 11 |
+| **DB Admin** | phpMyAdmin |
+| **Environment** | Docker & Docker Compose |
 
 ---
 
