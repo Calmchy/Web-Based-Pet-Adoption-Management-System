@@ -86,7 +86,7 @@ do_status() {
     check_compose
     sudo docker compose ps
     echo ""
-    sudo docker stats --no-stream --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.Status}}"
+    sudo docker stats --no-stream # --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.Status}}"
 }
 
 while true; do
