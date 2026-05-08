@@ -1,0 +1,162 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                    🐳 Docker Cheat Sheet                        ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DOCKER COMPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Build & Start
+  ─────────────
+  docker compose up -d                  Start containers in background
+  docker compose up -d --build          Rebuild images then start
+  docker compose build --no-cache       Force full rebuild (no cache)
+  docker compose pull                   Pull latest base images
+
+  Stop & Remove
+  ─────────────
+  docker compose down                   Stop and remove containers
+  docker compose down -v                Stop + delete volumes (WIPES DB!)
+  docker compose down --rmi all         Stop + remove all built images
+  docker compose stop                   Stop without removing containers
+  docker compose start                  Start previously stopped containers
+  docker compose restart                Restart all containers
+  docker compose restart <service>      Restart a specific service
+                                        e.g. docker compose restart php
+
+  Logs
+  ────
+  docker compose logs                   Show all logs
+  docker compose logs -f                Follow logs in real time (Ctrl+C to exit)
+  docker compose logs <service>         Logs for a specific service
+                                        e.g. docker compose logs mariadb
+
+  Status
+  ──────
+  docker compose ps                     List running containers
+  docker compose top                    Show running processes inside containers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DOCKER CONTAINERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Listing
+  ───────
+  docker ps                             List running containers
+  docker ps -a                          List all containers (incl. stopped)
+
+  Shell Access
+  ────────────
+  docker exec -it <name> bash           Open bash shell in container
+  docker exec -it <name> sh             Open sh shell (if bash not available)
+                                        e.g. docker exec -it php_app bash
+                                        e.g. docker exec -it mariadb bash
+
+  Start / Stop
+  ────────────
+  docker start <name>                   Start a stopped container
+  docker stop <name>                    Stop a running container
+  docker restart <name>                 Restart a container
+  docker rm <name>                      Remove a stopped container
+  docker rm -f <name>                   Force remove a running container
+
+  Inspect
+  ───────
+  docker inspect <name>                 Full container details (JSON)
+  docker logs <name>                    View container logs
+  docker logs -f <name>                 Follow container logs
+  docker port <name>                    Show port mappings
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DOCKER IMAGES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  docker images                         List all local images
+  docker pull <image>                   Download an image
+                                        e.g. docker pull mariadb:11
+  docker rmi <image>                    Remove an image
+  docker rmi -f <image>                 Force remove an image
+  docker image prune                    Remove unused/dangling images
+  docker image prune -a                 Remove ALL unused images
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DOCKER VOLUMES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  docker volume ls                      List all volumes
+  docker volume inspect <name>          Show volume details
+  docker volume rm <name>               Remove a volume
+  docker volume prune                   Remove all unused volumes
+                                        ⚠ This deletes database data!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DOCKER NETWORKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  docker network ls                     List all networks
+  docker network inspect <name>         Show network details
+  docker network prune                  Remove unused networks
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MONITORING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  docker stats                          Live CPU/memory stats (all containers)
+  docker stats <name>                   Live stats for one container
+  docker stats --no-stream              Snapshot stats (no live update)
+  docker stats --format \
+    "table {{.Name}}\t\
+    {{.CPUPerc}}\t\
+    {{.MemUsage}}"                      Custom formatted stats
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CLEANUP (FREE UP DISK SPACE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  docker system df                      Show Docker disk usage
+  docker system prune                   Remove stopped containers,
+                                        unused networks & dangling images
+  docker system prune -a                Full clean (keeps named volumes)
+  docker system prune -a --volumes      ⚠ FULL WIPE including volumes!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MARIADB QUICK ACCESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Open MariaDB shell as root:
+  docker exec -it mariadb mariadb -u root -p
+
+  Open MariaDB shell as app user:
+  docker exec -it mariadb mariadb -u adoptme -p adoptme
+
+  Useful SQL commands once inside:
+  ──────────────────────────────────
+  SHOW DATABASES;                       List all databases
+  USE <database>;                       Switch to a database
+  SHOW TABLES;                          List tables in current database
+  SHOW GRANTS FOR '<user>'@'%';         Show user permissions
+  SELECT User, Host FROM mysql.user;    List all users
+  EXIT;                                 Leave the shell
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  THIS PROJECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Services     : php_app | mariadb | phpmyadmin
+  PHP App      : http://localhost:6060
+  phpMyAdmin   : http://localhost:6061
+  DB User      : adoptme
+  DB Name      : adoptme
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚠  REMINDERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  • Always use "down -v" carefully — it DELETES your database volume
+  • MariaDB credentials only apply on first run (fresh volume)
+  • To reset DB: docker compose down -v → docker compose up -d
+  • Containers talk to each other using SERVICE NAME as hostname
+    (e.g. host = "mariadb", not "localhost")
+  • "restart: unless-stopped" means containers auto-start on boot
+
+══════════════════════════════════════════════════════════════════
