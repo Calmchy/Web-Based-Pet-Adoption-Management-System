@@ -2,7 +2,7 @@
 -- adoptme: web-based pet adoption management system
 -- submitted by: chyril s. manatad | reynaldo f. balais
 
-create database adoptme;
+create database if not exists adoptme;
 
 use adoptme;
 
