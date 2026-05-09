@@ -1,10 +1,10 @@
 <?php
     session_start();
 
-    $host = "mariadb";
-    $dbname = "adoptme";
-    $username = "root";
-    $password = "canwepass";
+    $host     = getenv('DB_HOST')     ?: 'mariadb';
+    $dbname   = getenv('DB_NAME')     ?: 'adoptme';
+    $username = getenv('DB_USER')     ?: 'adoptme';
+    $password = getenv('DB_PASSWORD') ?: '';
 
     $conn = new mysqli($host, $username, $password, $dbname);
 
@@ -16,4 +16,9 @@
         die("Direct access not allowed.");
     }
 
-    $conn->set_charset("utf8");
+    $conn->set_charset("utf8mb4");
+
+    // CSRF token — generated once per session
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
