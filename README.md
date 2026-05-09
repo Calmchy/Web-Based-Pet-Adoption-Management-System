@@ -119,4 +119,4 @@ The following steps are still completed **onsite at the adoption center:**
 *College of Information Technology Education — Abuyog Community College*
 *| IT PROF 3 – Fundamentals of Database Systems*
 *| IT PROF 7 – Web System Technologies*
-*| May 2026*
+*| JAN - MAY 2026*
