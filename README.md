@@ -10,6 +10,8 @@
 | Responsive Design | ❌ Not Started |
 | Deployment | ❌ Not Started |
 
+---
+
 # 🐾 AdoptMe: Web-Based Pet Adoption Management System
 
 > A centralized platform for managing pet adoption processes efficiently and securely.
