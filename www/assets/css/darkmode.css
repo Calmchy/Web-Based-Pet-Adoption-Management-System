@@ -1,0 +1,70 @@
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode {
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+
+/* HEADER */
+body.dark-mode header {
+    background-color: #1e293b;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+/* NAV LINKS */
+body.dark-mode .nav-links a,
+body.dark-mode .nav-right a {
+    color: #e2e8f0;
+}
+
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-right a:hover {
+    color: #38bdf8;
+}
+
+/* BRAND */
+body.dark-mode .brand p {
+    color: #94a3b8;
+}
+
+/* HERO */
+body.dark-mode .hero {
+    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+}
+
+/* CARDS */
+body.dark-mode .card {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+/* BUTTON */
+body.dark-mode .btn {
+    background-color: #2563eb;
+}
+
+body.dark-mode .btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* REGISTER BUTTON */
+body.dark-mode .register-btn {
+    background-color: #2563eb;
+}
+
+body.dark-mode .register-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* FOOTER */
+body.dark-mode footer {
+    background-color: #1e293b;
+}
+
+/* DARK MODE BUTTON */
+body.dark-mode #darkModeBtn {
+    color: #facc15;
+}
