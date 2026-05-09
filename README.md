@@ -1,3 +1,15 @@
+## Project Status
+
+| Feature | Status |
+|----------|---------|
+| User Authentication | ⏳ Pending |
+| Pet Management | ❌ Not Started |
+| Pet Adoption System | 🚧 In Progress |
+| Admin Dashboard | ❌ Not Started |
+| Image Upload | ❌ Not Started |
+| Responsive Design | ❌ Not Started |
+| Deployment | ❌ Not Started |
+
 # 🐾 AdoptMe: Web-Based Pet Adoption Management System
 
 > A centralized platform for managing pet adoption processes efficiently and securely.
