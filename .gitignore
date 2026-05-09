@@ -1,0 +1,12 @@
+# Environment — never commit real credentials
+.env
+
+# User uploaded files
+www/assets/uploads/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
