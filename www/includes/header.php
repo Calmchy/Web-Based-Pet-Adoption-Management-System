@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/darkmode.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
     <link rel="shortcut icon" href="../assets/images/logo.png" type="image/x-icon">
 </head>
 <body>
