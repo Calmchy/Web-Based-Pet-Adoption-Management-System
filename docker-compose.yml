@@ -5,9 +5,14 @@ services:
     build: ./php
     container_name: php_app
     ports:
-      - "6060:80"
+      - "${APP_PORT:-6060}:80"
     volumes:
       - ./www:/var/www/html
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       - mariadb
     networks:
@@ -19,12 +24,13 @@ services:
     image: mariadb:11
     container_name: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: canwepass
-      MYSQL_DATABASE: adoptme
-      MYSQL_USER: adoptme
-      MYSQL_PASSWORD: idontknow
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mariadb_data:/var/lib/mysql
+      - ./www/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
     networks:
       - app-network
     restart: unless-stopped
@@ -34,11 +40,11 @@ services:
     image: phpmyadmin:latest
     container_name: phpmyadmin
     ports:
-      - "6061:80"
+      - "${PHPMYADMIN_PORT:-6061}:80"
     environment:
       PMA_HOST: mariadb
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: canwepass
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     depends_on:
       - mariadb
     networks:
