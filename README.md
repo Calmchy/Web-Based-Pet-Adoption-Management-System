@@ -2,11 +2,11 @@
 
 | Feature | Status |
 |----------|---------|
-| User Authentication | ⏳ Pending |
-| Pet Management | ❌ Not Started |
+| User Authentication | ✅ Completed |
+| Pet Management | ⏳ Pending |
 | Pet Adoption System | 🚧 In Progress |
-| Admin Dashboard | ❌ Not Started |
-| Image Upload | ❌ Not Started |
+| Admin Dashboard | 🚧 In Progress |
+| Image Upload | 🚧 In Progress |
 | Responsive Design | ❌ Not Started |
 | Deployment | ❌ Not Started |
 
