@@ -5,16 +5,22 @@
     }
 
     $errors = $_SESSION['register_errors'] ?? [];
-    $old     = $_SESSION['register_old']    ?? [];
+    $old    = $_SESSION['register_old']    ?? [];
     unset($_SESSION['register_errors'], $_SESSION['register_old']);
 ?>
 
 <main class="auth-wrapper">
+
+    <div class="auth-bg-blob auth-bg-blob--1"></div>
+    <div class="auth-bg-blob auth-bg-blob--2"></div>
+
     <div class="auth-card">
+
+        <div class="auth-brand-icon">🐾</div>
 
         <div class="auth-header">
             <h2>Create Account</h2>
-            <p>Join AdoptMe and find your perfect companion 🐾</p>
+            <p>Join AdoptME and find your perfect companion</p>
         </div>
 
         <?php if (!empty($errors)): ?>
@@ -28,10 +34,28 @@
         <?php endif; ?>
 
         <form action="actions/register_action.php" method="POST" enctype="multipart/form-data" class="auth-form">
+            
+            <!-- Profile Image -->
+            <fieldset>
+                <legend>🖼️ Profile Photo</legend>
+                <div class="form-group">
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <img id="avatarPreview" src="assets/images/default-avatar.png" alt="Preview">
+                        </div>
+                        <div class="avatar-info">
+                            <label for="profile_image" class="btn-upload">📷 Choose Photo</label>
+                            <input type="file" id="profile_image" name="profile_image"
+                                   accept="image/jpeg,image/png,image/webp" style="display:none;">
+                            <p class="upload-hint">JPG, PNG, or WEBP &middot; Max 2MB &middot; Optional</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
 
             <!-- Personal Information -->
             <fieldset>
-                <legend>Personal Information</legend>
+                <legend>👤 Personal Information</legend>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -75,7 +99,7 @@
 
             <!-- Address -->
             <fieldset>
-                <legend>Address</legend>
+                <legend>📍 Address</legend>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -94,28 +118,9 @@
                 </div>
             </fieldset>
 
-            <!-- Profile Image -->
-            <fieldset>
-                <legend>Profile Image</legend>
-
-                <div class="form-group">
-                    <div class="avatar-upload">
-                        <div class="avatar-preview">
-                            <img id="avatarPreview" src="assets/images/default-avatar.png" alt="Preview">
-                        </div>
-                        <div class="avatar-info">
-                            <label for="profile_image" class="btn-upload">Choose Photo</label>
-                            <input type="file" id="profile_image" name="profile_image"
-                                   accept="image/jpeg,image/png,image/webp" style="display:none;">
-                            <p class="upload-hint">JPG, PNG, or WEBP · Max 2MB · Optional</p>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
             <!-- Password -->
             <fieldset>
-                <legend>Password</legend>
+                <legend>🔒 Password</legend>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -125,6 +130,7 @@
                                    placeholder="Min. 8 characters" required>
                             <button type="button" class="toggle-pw" data-target="password">👁</button>
                         </div>
+                        <div class="pw-strength" id="pwStrength"></div>
                     </div>
 
                     <div class="form-group">
@@ -138,18 +144,82 @@
                 </div>
             </fieldset>
 
-            <button type="submit" class="btn-primary btn-full">Create Account</button>
+            <button type="submit" class="btn-primary btn-full">
+                Create My Account &rarr;
+            </button>
 
         </form>
 
         <p class="auth-switch">
-            Already have an account? <a href="index.php?page=login">Login here</a>
+            Already have an account? <a href="index.php?page=login">Sign in here</a>
         </p>
 
     </div>
 </main>
 
+<style>
+.auth-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.auth-bg-blob--1 {
+    width: 340px; height: 340px;
+    background: radial-gradient(circle, #f39c12 0%, transparent 70%);
+    top: -80px; right: -80px;
+    opacity: .15;
+}
+
+.auth-bg-blob--2 {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, #3498db 0%, transparent 70%);
+    bottom: -60px; left: -60px;
+    opacity: .12;
+}
+
+.auth-card {
+    position: relative;
+    z-index: 1;
+}
+
+.auth-brand-icon {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: .5rem;
+    line-height: 1;
+}
+
+.auth-header h2 {
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -.4px;
+}
+
+.btn-primary.btn-full {
+    margin-top: 1rem;
+    letter-spacing: .02em;
+}
+
+/* Password strength bar */
+.pw-strength {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 6px;
+    transition: width .3s, background .3s;
+    width: 0;
+}
+</style>
+
 <script>
+    // Toggle password visibility
     document.querySelectorAll('.toggle-pw').forEach(btn => {
         btn.addEventListener('click', () => {
             const input = document.getElementById(btn.dataset.target);
@@ -170,5 +240,28 @@
         const reader = new FileReader();
         reader.onload = e => document.getElementById('avatarPreview').src = e.target.result;
         reader.readAsDataURL(file);
+    });
+
+    // Password strength meter
+    const pwInput    = document.getElementById('password');
+    const strengthEl = document.getElementById('pwStrength');
+    const colors     = ['#ef4444', '#f97316', '#eab308', '#22c55e'];
+    const labels     = ['Weak', 'Fair', 'Good', 'Strong'];
+
+    pwInput.addEventListener('input', () => {
+        const v = pwInput.value;
+        let score = 0;
+        if (v.length >= 8)              score++;
+        if (/[A-Z]/.test(v))            score++;
+        if (/[0-9]/.test(v))            score++;
+        if (/[^A-Za-z0-9]/.test(v))     score++;
+        if (v.length === 0) {
+            strengthEl.style.width = '0';
+            strengthEl.title = '';
+        } else {
+            strengthEl.style.width  = ((score / 4) * 100) + '%';
+            strengthEl.style.background = colors[score - 1] || '#ef4444';
+            strengthEl.title = labels[score - 1] || '';
+        }
     });
 </script>
