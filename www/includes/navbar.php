@@ -29,7 +29,11 @@
         <button id="darkModeBtn">🌙</button>
 
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="#">Dashboard</a>
+            <?php if (($_SESSION['role'] ?? '') === 'admin'): ?>
+                <a href="admin/dashboard.php" class="register-btn" style="display:flex;align-items:center;gap:5px;">🛡️ Admin</a>
+            <?php else: ?>
+                <a href="#">My Account</a>
+            <?php endif; ?>
             <a href="actions/logout.php">Logout</a>
         <?php else: ?>
             <a href="index.php?page=login">Login</a>
