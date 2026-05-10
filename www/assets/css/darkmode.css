@@ -68,3 +68,124 @@ body.dark-mode footer {
 body.dark-mode #darkModeBtn {
     color: #facc15;
 }
+/* =========================
+   AUTH PAGES — DARK MODE
+========================= */
+
+body.dark-mode .auth-wrapper {
+    background: transparent;
+}
+
+body.dark-mode .auth-card {
+    background: #1e293b;
+    box-shadow: 0 4px 32px rgba(0,0,0,.35);
+    border: 1px solid #2d3f55;
+}
+
+body.dark-mode .auth-header h2 {
+    color: #f39c12;
+}
+
+body.dark-mode .auth-header p {
+    color: #94a3b8;
+}
+
+body.dark-mode .form-group label {
+    color: #cbd5e1;
+}
+
+body.dark-mode .form-group input {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+body.dark-mode .form-group input:focus {
+    border-color: #f39c12;
+    background: #0f172a;
+    box-shadow: 0 0 0 3px rgba(243,156,18,.12);
+}
+
+body.dark-mode .form-group input::placeholder {
+    color: #475569;
+}
+
+body.dark-mode fieldset {
+    border-color: #2d3f55;
+}
+
+body.dark-mode legend {
+    color: #f39c12;
+}
+
+body.dark-mode .input-password {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-mode .input-password:focus-within {
+    border-color: #f39c12;
+    background: #0f172a;
+}
+
+body.dark-mode .input-password input {
+    background: transparent;
+    color: #e2e8f0;
+}
+
+body.dark-mode .toggle-pw {
+    color: #64748b;
+}
+
+body.dark-mode .toggle-pw:hover {
+    color: #94a3b8;
+}
+
+body.dark-mode .btn-primary {
+    background: #f39c12;
+}
+
+body.dark-mode .btn-primary:hover {
+    background: #e67e22;
+}
+
+body.dark-mode .auth-switch {
+    color: #64748b;
+}
+
+body.dark-mode .auth-switch a {
+    color: #f39c12;
+}
+
+body.dark-mode .alert-error {
+    background: rgba(185,28,28,.18);
+    color: #fca5a5;
+    border-left-color: #ef4444;
+}
+
+body.dark-mode .alert-success {
+    background: rgba(21,128,61,.18);
+    color: #86efac;
+    border-left-color: #22c55e;
+}
+
+body.dark-mode .avatar-preview {
+    border-color: #f39c12;
+    background: #0f172a;
+}
+
+body.dark-mode .btn-upload {
+    background: #f39c12;
+}
+
+body.dark-mode .btn-upload:hover {
+    background: #e67e22;
+}
+
+body.dark-mode .upload-hint {
+    color: #64748b;
+}
+
+body.dark-mode .required {
+    color: #f87171;
+}
