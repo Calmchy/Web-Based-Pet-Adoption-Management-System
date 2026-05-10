@@ -1,0 +1,286 @@
+<?php
+ob_start();
+define('APP_RUNNING', true);
+require_once "../includes/config.php";
+require_once "../includes/auth.php";
+
+require_role('admin');
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+$stats = [
+    'total_pets'       => 0,
+    'available_pets'   => 0,
+    'total_users'      => 0,
+    'total_apps'       => 0,
+    'pending_apps'     => 0,
+    'approved_apps'    => 0,
+];
+
+$q = $conn->query("SELECT COUNT(*) as c FROM pets");
+if ($q) $stats['total_pets'] = $q->fetch_assoc()['c'];
+
+$q = $conn->query("SELECT COUNT(*) as c FROM pets WHERE status = 'available'");
+if ($q) $stats['available_pets'] = $q->fetch_assoc()['c'];
+
+$q = $conn->query("SELECT COUNT(*) as c FROM users WHERE role = 'adopter'");
+if ($q) $stats['total_users'] = $q->fetch_assoc()['c'];
+
+$q = $conn->query("SELECT COUNT(*) as c FROM applications");
+if ($q) $stats['total_apps'] = $q->fetch_assoc()['c'];
+
+$q = $conn->query("SELECT COUNT(*) as c FROM applications WHERE status = 'pending'");
+if ($q) $stats['pending_apps'] = $q->fetch_assoc()['c'];
+
+$q = $conn->query("SELECT COUNT(*) as c FROM applications WHERE status = 'approved'");
+if ($q) $stats['approved_apps'] = $q->fetch_assoc()['c'];
+
+// ── Recent Applications ────────────────────────────────────────────────────
+$recent_apps = [];
+$q = $conn->query("
+    SELECT a.application_id, a.status, a.applied_at,
+           CONCAT(u.first_name, ' ', u.last_name) AS applicant,
+           p.name AS pet_name
+    FROM applications a
+    JOIN users u ON u.user_id = a.user_id
+    JOIN pets p  ON p.pet_id  = a.pet_id
+    ORDER BY a.applied_at DESC
+    LIMIT 8
+");
+if ($q) $recent_apps = $q->fetch_all(MYSQLI_ASSOC);
+
+// ── Recent Pets ────────────────────────────────────────────────────────────
+$recent_pets = [];
+$q = $conn->query("
+    SELECT p.pet_id, p.name, p.gender, p.status, p.created_at,
+           b.breed_name, c.category_name
+    FROM pets p
+    LEFT JOIN breeds b     ON b.breed_id    = p.breed_id
+    LEFT JOIN categories c ON c.category_id = b.category_id
+    ORDER BY p.created_at DESC
+    LIMIT 6
+");
+if ($q) $recent_pets = $q->fetch_all(MYSQLI_ASSOC);
+
+$admin_name = ($_SESSION['first_name'] ?? '') . ' ' . ($_SESSION['last_name'] ?? '');
+$admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — AdoptME 🐾</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="shortcut icon" href="../assets/images/logo2.png" type="image/x-icon">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <img src="../assets/images/logo.png" alt="AdoptME Logo">
+            <div class="sidebar-brand-text">
+                <h2>AdoptME</h2>
+                <span>Admin Panel</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main</div>
+            <a href="dashboard.php" class="active">
+                <span class="nav-icon">🏠</span> Dashboard
+            </a>
+            <a href="pets.php">
+                <span class="nav-icon">🐾</span> Pets
+            </a>
+            <a href="applications.php">
+                <span class="nav-icon">📋</span> Applications
+                <?php if ($stats['pending_apps'] > 0): ?>
+                    <span class="badge badge-pending" style="margin-left:auto;"><?= $stats['pending_apps'] ?></span>
+                <?php endif; ?>
+            </a>
+
+            <div class="nav-section-label" style="margin-top:12px;">System</div>
+            <a href="../index.php?page=home" target="_blank">
+                <span class="nav-icon">🌐</span> View Site
+            </a>
+            <a href="../actions/logout.php" style="color:#f87171;">
+                <span class="nav-icon">🚪</span> Logout
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar"><?= htmlspecialchars($admin_init) ?></div>
+                <div class="sidebar-user-info">
+                    <strong><?= htmlspecialchars(trim($admin_name)) ?></strong>
+                    <span>Administrator</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="admin-main">
+
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <h1>Dashboard</h1>
+                <p>Welcome back, <?= htmlspecialchars($_SESSION['first_name'] ?? 'Admin') ?> 👋</p>
+            </div>
+            <div class="topbar-right">
+                <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+                <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="page-content">
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon orange">🐕</div>
+                    <div class="stat-info">
+                        <h3><?= $stats['total_pets'] ?></h3>
+                        <p>Total Pets</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue">✅</div>
+                    <div class="stat-info">
+                        <h3><?= $stats['available_pets'] ?></h3>
+                        <p>Available Pets</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">👥</div>
+                    <div class="stat-info">
+                        <h3><?= $stats['total_users'] ?></h3>
+                        <p>Registered Adopters</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">⏳</div>
+                    <div class="stat-info">
+                        <h3><?= $stats['pending_apps'] ?></h3>
+                        <p>Pending Applications</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">🎉</div>
+                    <div class="stat-info">
+                        <h3><?= $stats['approved_apps'] ?></h3>
+                        <p>Approved Applications</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tables Grid -->
+            <div class="content-grid">
+
+                <!-- Recent Applications -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>📋 Recent Applications</h3>
+                        <a href="applications.php">View all →</a>
+                    </div>
+                    <?php if (empty($recent_apps)): ?>
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <p>No applications yet.</p>
+                        </div>
+                    <?php else: ?>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Applicant</th>
+                                    <th>Pet</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recent_apps as $app): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($app['applicant']) ?></td>
+                                    <td><?= htmlspecialchars($app['pet_name']) ?></td>
+                                    <td>
+                                        <span class="badge badge-<?= $app['status'] ?>">
+                                            <?= ucfirst($app['status']) ?>
+                                        </span>
+                                    </td>
+                                    <td style="color:var(--text-muted);font-size:.8rem;">
+                                        <?= date('M j, Y', strtotime($app['applied_at'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Recent Pets -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>🐾 Recent Pets</h3>
+                        <a href="pets.php">Manage →</a>
+                    </div>
+                    <?php if (empty($recent_pets)): ?>
+                        <div class="empty-state">
+                            <div class="empty-icon">🐾</div>
+                            <p>No pets listed yet.</p>
+                        </div>
+                    <?php else: ?>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Breed</th>
+                                    <th>Gender</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recent_pets as $pet): ?>
+                                <tr>
+                                    <td><strong><?= htmlspecialchars($pet['name']) ?></strong></td>
+                                    <td style="color:var(--text-muted);font-size:.85rem;">
+                                        <?= htmlspecialchars($pet['breed_name'] ?? 'Unknown') ?>
+                                    </td>
+                                    <td style="text-transform:capitalize;">
+                                        <?= htmlspecialchars($pet['gender'] ?? '—') ?>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-<?= $pet['status'] ?>">
+                                            <?= ucfirst($pet['status']) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const btn = document.getElementById('themeToggle');
+    function applyTheme(dark) {
+        document.body.classList.toggle('dark-mode', dark);
+        btn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+    const saved = localStorage.getItem('theme');
+    applyTheme(saved === 'dark');
+    btn.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark-mode')));
+</script>
+</body>
+</html>
