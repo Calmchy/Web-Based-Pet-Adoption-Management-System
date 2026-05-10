@@ -29,7 +29,7 @@
 .auth-header h2 {
     font-size: 1.75rem;
     margin-bottom: .3rem;
-    color: var(--primary, #e07b54);
+    color: var(--primary, #3498db);
 }
 .auth-header p {
     color: var(--text-muted, #777);
@@ -59,7 +59,7 @@ legend {
     font-size: .85rem;
     text-transform: uppercase;
     letter-spacing: .05em;
-    color: var(--primary, #e07b54);
+    color: var(--primary, #3498db);
     padding: 0 .4rem;
 }
 
@@ -83,7 +83,7 @@ legend {
     margin-bottom: .35rem;
     color: var(--text, #333);
 }
-.required { color: #e53935; }
+.required { color: #3498db; }
 
 .form-group input {
     width: 100%;
@@ -98,7 +98,7 @@ legend {
 }
 .form-group input:focus {
     outline: none;
-    border-color: var(--primary, #e07b54);
+    border-color: var(--primary, #3498db);
     background: #fff;
 }
 
@@ -113,7 +113,7 @@ legend {
     transition: border-color .2s;
 }
 .input-password:focus-within {
-    border-color: var(--primary, #e07b54);
+    border-color: var(--primary, #3498db);
     background: #fff;
 }
 .input-password input {
@@ -134,7 +134,7 @@ legend {
 
 /* Buttons */
 .btn-primary {
-    background: var(--primary, #e07b54);
+    background: var(--primary, #3498db);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -144,7 +144,7 @@ legend {
     cursor: pointer;
     transition: background .2s, transform .1s;
 }
-.btn-primary:hover  { background: var(--primary-dark, #c9643e); }
+.btn-primary:hover  { background: var(--primary-dark, #2980b9); }
 .btn-primary:active { transform: scale(.98); }
 .btn-full { width: 100%; margin-top: .5rem; }
 
@@ -156,7 +156,7 @@ legend {
     color: var(--text-muted, #777);
 }
 .auth-switch a {
-    color: var(--primary, #e07b54);
+    color: var(--primary, #3498db);
     font-weight: 600;
     text-decoration: none;
 }
@@ -179,7 +179,7 @@ legend {
     height: 90px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--primary, #e07b54);
+    border: 3px solid var(--primary, #3498db);
     flex-shrink: 0;
     background: #f0f0f0;
 }
@@ -190,7 +190,7 @@ legend {
 }
 .btn-upload {
     display: inline-block;
-    background: var(--primary, #e07b54);
+    background: var(--primary, #3498db);
     color: #fff;
     padding: .5rem 1.1rem;
     border-radius: 7px;
@@ -199,7 +199,7 @@ legend {
     cursor: pointer;
     transition: background .2s;
 }
-.btn-upload:hover { background: var(--primary-dark, #c9643e); }
+.btn-upload:hover { background: var(--primary-dark, #2980b9); }
 .upload-hint {
     margin-top: .4rem;
     font-size: .8rem;
