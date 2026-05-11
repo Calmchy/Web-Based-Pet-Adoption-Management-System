@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir -p www/assets/uploads/profiles
+docker exec -it php_app ls -ld /var/www/html/assets/uploads/profiles
+
 # Use the directory where this script is located
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
