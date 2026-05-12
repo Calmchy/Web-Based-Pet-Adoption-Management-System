@@ -57,7 +57,7 @@
             <fieldset>
                 <legend>👤 Personal Information</legend>
 
-                <div class="form-row">
+                <div class="form-row-3">
                     <div class="form-group">
                         <label for="first_name">First Name <span class="required">*</span></label>
                         <input type="text" id="first_name" name="first_name"
