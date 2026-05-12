@@ -77,50 +77,7 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
 
 <div class="admin-layout">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-brand">
-            <img src="../assets/images/logo.png" alt="AdoptME Logo">
-            <div class="sidebar-brand-text">
-                <h2>AdoptME</h2>
-                <span>Admin Panel</span>
-            </div>
-        </div>
-
-        <nav class="sidebar-nav">
-            <div class="nav-section-label">Main</div>
-            <a href="dashboard.php" class="active">
-                <span class="nav-icon">🏠</span> Dashboard
-            </a>
-            <a href="pets.php">
-                <span class="nav-icon">🐾</span> Pets
-            </a>
-            <a href="applications.php">
-                <span class="nav-icon">📋</span> Applications
-                <?php if ($stats['pending_apps'] > 0): ?>
-                    <span class="badge badge-pending" style="margin-left:auto;"><?= $stats['pending_apps'] ?></span>
-                <?php endif; ?>
-            </a>
-
-            <div class="nav-section-label" style="margin-top:12px;">System</div>
-            <a href="../index.php?page=home" target="_blank">
-                <span class="nav-icon">🌐</span> View Site
-            </a>
-            <a href="../actions/logout.php" style="color:#f87171;">
-                <span class="nav-icon">🚪</span> Logout
-            </a>
-        </nav>
-
-        <div class="sidebar-footer">
-            <div class="sidebar-user">
-                <div class="sidebar-user-avatar"><?= htmlspecialchars($admin_init) ?></div>
-                <div class="sidebar-user-info">
-                    <strong><?= htmlspecialchars(trim($admin_name)) ?></strong>
-                    <span>Administrator</span>
-                </div>
-            </div>
-        </div>
-    </aside>
+    <?php include "includes/sidebar.php"; ?>
 
     <!-- Main -->
     <div class="admin-main">
@@ -271,16 +228,4 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
     </div>
 </div>
 
-<script>
-    const btn = document.getElementById('themeToggle');
-    function applyTheme(dark) {
-        document.body.classList.toggle('dark-mode', dark);
-        btn.textContent = dark ? '☀️ Light' : '🌙 Dark';
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-    }
-    const saved = localStorage.getItem('theme');
-    applyTheme(saved === 'dark');
-    btn.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark-mode')));
-</script>
-</body>
-</html>
+<?php include "includes/admin_footer.php"; ?>
