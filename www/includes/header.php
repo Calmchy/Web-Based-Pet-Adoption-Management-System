@@ -13,7 +13,5 @@
     <link rel="shortcut icon" href="../assets/images/logo2.png" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <?php include "includes/navbar.php"; ?>
-    </header>
+    <?php include "includes/navbar.php"; ?>
     <script src="assets/js/darkmode.js"></script>
