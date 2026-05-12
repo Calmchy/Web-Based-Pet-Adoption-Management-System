@@ -71,7 +71,7 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — AdoptME 🐾</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="shortcut icon" href="../assets/images/logo2.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/logo.png" type="image/x-icon">
 </head>
 <body>
 
