@@ -1,13 +1,15 @@
-/* =========================
+/* ####################################
    DARK MODE
-========================= */
+####################################### */
 
 body.dark-mode {
     background-color: #0f172a;
     color: #e2e8f0;
 }
 
-/* HEADER */
+/* ####################################
+    HEADER 
+####################################### */
 body.dark-mode header {
     background-color: #1e293b;
     box-shadow: 0 2px 10px rgba(0,0,0,0.4);
@@ -68,9 +70,9 @@ body.dark-mode footer {
 body.dark-mode #darkModeBtn {
     color: #facc15;
 }
-/* =========================
+/* ####################################
    AUTH PAGES — DARK MODE
-========================= */
+####################################### */
 
 body.dark-mode .auth-wrapper {
     background: transparent;
