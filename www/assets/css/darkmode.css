@@ -51,7 +51,9 @@ body.dark-mode .card {
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
 
-/* BUTTON */
+/* ####################################
+    BUTTON
+####################################### */
 body.dark-mode .btn {
     background-color: #2563eb;
 }
@@ -60,7 +62,9 @@ body.dark-mode .btn:hover {
     background-color: #1d4ed8;
 }
 
-/* REGISTER BUTTON */
+/* ####################################
+    REGISTER BUTTON
+####################################### */
 body.dark-mode .register-btn {
     background-color: #2563eb;
 }
@@ -69,7 +73,9 @@ body.dark-mode .register-btn:hover {
     background-color: #1d4ed8;
 }
 
-/* FOOTER */
+/* ####################################
+    FOOTER
+####################################### */
 body.dark-mode footer {
     background-color: #1e293b;
 }
