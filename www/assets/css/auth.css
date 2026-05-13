@@ -164,7 +164,9 @@ legend {
     box-shadow: 0 0 0 3px rgba(243,156,18,.12);
 }
 
-/* Icon-wrapped inputs */
+/* ####################################
+    Icon-wrapped inputs
+####################################### */
 .input-icon-wrap {
     position: relative;
     display: flex;
@@ -180,7 +182,9 @@ legend {
 }
 .input-icon-wrap input { padding-left: 2.4rem !important; }
 
-/* Password toggle */
+/* ####################################
+    Password toggle
+####################################### */
 .input-password {
     display: flex;
     align-items: center;
@@ -215,7 +219,9 @@ legend {
     flex-shrink: 0;
 }
 
-/* Password strength bar */
+/* ####################################
+    Password strength bar
+####################################### */
 .pw-strength {
     height: 4px;
     border-radius: 2px;
@@ -224,7 +230,9 @@ legend {
     width: 0;
 }
 
-/* Avatar upload */
+/* ####################################
+    Avatar upload
+####################################### */
 .avatar-upload {
     display: flex;
     align-items: center;
@@ -262,7 +270,9 @@ legend {
     color: var(--text-muted, #888);
 }
 
-/* Buttons */
+/* ####################################
+    Buttons
+####################################### */
 .btn-primary {
     background: #f39c12;
     color: #fff;
@@ -280,7 +290,9 @@ legend {
 .btn-primary:hover  { background: #e67e22; }
 .btn-primary:active { transform: scale(.98); }
 
-/* Divider */
+/* ####################################
+    Divider
+####################################### */
 .auth-divider {
     display: flex;
     align-items: center;
@@ -297,7 +309,9 @@ legend {
     background: var(--border, #e5e5e5);
 }
 
-/* Switch link */
+/* ####################################
+    Switch link
+####################################### */
 .auth-switch {
     text-align: center;
     margin-top: 1rem;
@@ -311,9 +325,9 @@ legend {
 }
 .auth-switch a:hover { text-decoration: underline; }
 
-/* ═══════════════════════════════════════
+/* ####################################
    DARK MODE
-═══════════════════════════════════════ */
+####################################### */
 body.dark-mode .auth-card {
     background: #1e293b;
     box-shadow: 0 4px 32px rgba(0,0,0,.35);
@@ -346,9 +360,9 @@ body.dark-mode .auth-divider { color: #475569; }
 body.dark-mode .auth-divider::before,
 body.dark-mode .auth-divider::after { background: #2d3f55; }
 
-/* ═══════════════════════════════════════
+/* ####################################
    MOBILE
-═══════════════════════════════════════ */
+####################################### */
 @media (max-width: 480px) {
     .auth-wrapper { padding: 1rem .75rem; align-items: flex-start; }
     .auth-card { padding: 1.5rem 1rem; border-radius: 12px; }
