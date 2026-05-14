@@ -1,6 +1,4 @@
 -- adoptme: csv import script
--- run with: doas mariadb --local-infile=1 adoptme < /home/calmchy/Documents/csv/import_csv.sql
-
 use adoptme;
 
 -- disable fk checks during import to avoid ordering issues
