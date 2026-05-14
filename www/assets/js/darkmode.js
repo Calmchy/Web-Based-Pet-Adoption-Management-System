@@ -3,7 +3,7 @@ const darkBtn = document.getElementById("darkModeBtn");
 darkBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 
-    // Save mode
+    // ############# Save mode #############
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("theme", "dark");
     } else {
@@ -11,7 +11,7 @@ darkBtn.addEventListener("click", () => {
     }
 });
 
-// Load saved theme
+// ############# Load saved theme #############
 window.addEventListener("load", () => {
     const theme = localStorage.getItem("theme");
 
