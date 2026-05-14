@@ -107,7 +107,9 @@ header {
 }
 #darkModeBtn:hover { background: rgba(255,255,255,.1); }
 
-/* ── Hamburger ── */
+/* #######################################
+    Hamburger 
+########################################## */
 .nav-hamburger {
     display: none;
     background: none;
@@ -139,7 +141,9 @@ header {
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Mobile Drawer ── */
+/* #######################################
+   Mobile Drawer
+########################################## */
 .nav-drawer {
     display: none;
     width: 100%;
@@ -178,9 +182,9 @@ header {
     margin-top: 4px;
 }
 
-/* ═══════════════════════════════════════
+/* #######################################
    DARK MODE
-═══════════════════════════════════════ */
+########################################## */
 body.dark-mode header               { background-color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,.4); }
 body.dark-mode .nav-links a,
 body.dark-mode .nav-right a         { color: #e2e8f0; }
@@ -191,9 +195,9 @@ body.dark-mode .nav-drawer          { background: #1e293b; border-top-color: rgb
 body.dark-mode .nav-drawer a        { color: #e2e8f0; }
 body.dark-mode #darkModeBtn         { color: #facc15; }
 
-/* ═══════════════════════════════════════
+/* #######################################
    RESPONSIVE
-═══════════════════════════════════════ */
+########################################## */
 @media (max-width: 700px) {
     header {
         padding: 0 16px;
@@ -210,9 +214,9 @@ body.dark-mode #darkModeBtn         { color: #facc15; }
     .brand p  { display: none; }
     .logo     { width: 40px; height: 40px; }
 }
-/* ═══════════════════════════════════════
+/* #######################################
    NOTIFICATION BELL — NAVBAR
-═══════════════════════════════════════ */
+########################################## */
 .nav-notif { position: relative; }
 
 .nav-notif-btn {
@@ -266,7 +270,9 @@ body.dark-mode .nav-notif-dropdown {
     border-color: #2d3f55;
 }
 
-/* Reuse notif-header, notif-list, notif-item, notif-empty styles from admin.css */
+/* #######################################
+   NOTIFICATION DROPDOWN — REUSED STYLES
+########################################## */
 .nav-notif-dropdown .notif-header {
     padding: 12px 16px 10px;
     border-bottom: 1px solid #e2e8f0;
@@ -304,7 +310,9 @@ body.dark-mode .nav-notif-dropdown .notif-text p { color: #e2e8f0; }
 }
 .nav-notif-dropdown .notif-mark-read:hover { text-decoration: underline; }
 
-/* Mobile: position dropdown to not go off screen */
+/* #######################################
+   Mobile: position dropdown to not go off screen
+########################################## */
 @media (max-width: 700px) {
     .nav-notif-dropdown { right: -60px; width: 270px; }
 }
