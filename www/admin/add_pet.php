@@ -6,7 +6,7 @@ require_once "../includes/auth.php";
 require_role('admin');
 
 $flash_error = $_SESSION['admin_error'] ?? null;
-$old         = $_SESSION['admin_old']   ?? [];
+$old = $_SESSION['admin_old'] ?? [];
 unset($_SESSION['admin_error'], $_SESSION['admin_old']);
 
 // Fetch categories for the category dropdown
@@ -30,11 +30,8 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
 <div class="admin-layout">
-
     <?php include "includes/sidebar.php"; ?>
-
     <div class="admin-main">
-
         <div class="topbar">
             <div class="topbar-left">
                 <button class="sidebar-toggle" id="sidebarToggle"><span></span><span></span><span></span></button>
@@ -48,24 +45,19 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
         </div>
-
         <div class="page-content">
-
             <?php if ($flash_error): ?>
                 <div class="alert alert-error"><?= htmlspecialchars($flash_error) ?></div>
             <?php endif; ?>
-
             <div class="panel" style="max-width:760px;">
                 <div class="panel-header">
                     <h3>🐾 New Pet Details</h3>
                     <a href="pets.php">← Back to Pets</a>
                 </div>
                 <div class="panel-body">
-
                     <form action="../actions/admin/pet_action.php" method="POST"
                           enctype="multipart/form-data" class="admin-form">
                         <input type="hidden" name="action" value="add">
-
                         <!-- Name + Gender -->
                         <div class="form-row-2">
                             <div class="form-group">
@@ -83,7 +75,6 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                 </select>
                             </div>
                         </div>
-
                         <!-- Category + Breed -->
                         <div class="form-row-2">
                             <div class="form-group">
@@ -105,7 +96,6 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                 </select>
                             </div>
                         </div>
-
                         <!-- Age + Status -->
                         <div class="form-row-2">
                             <div class="form-group">
@@ -123,7 +113,6 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                 </select>
                             </div>
                         </div>
-
                         <!-- Description -->
                         <div class="form-group">
                             <label for="description">Description</label>
@@ -131,7 +120,6 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                       placeholder="Personality, health notes, special needs..."
                                       rows="4"><?= htmlspecialchars($old['description'] ?? '') ?></textarea>
                         </div>
-
                         <!-- Images -->
                         <div class="form-group">
                             <label>Photos (up to 5 · JPG, PNG, WEBP · Max 2MB each)</label>
@@ -147,12 +135,10 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                             </div>
                             <div class="image-preview-grid" id="imagePreviewGrid"></div>
                         </div>
-
                         <div style="display:flex;gap:12px;margin-top:8px;">
                             <button type="submit" class="btn-admin-primary">🐾 Add Pet</button>
                             <a href="pets.php" class="btn-admin-secondary">Cancel</a>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -162,10 +148,10 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
 
 <script>
 // ── Breed filter by category ──────────────────────────────────────────────
-const allBreeds    = <?= json_encode($breeds) ?>;
-const categorySel  = document.getElementById('category_id');
-const breedSel     = document.getElementById('breed_id');
-const savedBreed   = <?= json_encode($old['breed_id'] ?? '') ?>;
+const allBreeds = <?= json_encode($breeds) ?>;
+const categorySel = document.getElementById('category_id');
+const breedSel = document.getElementById('breed_id');
+const savedBreed = <?= json_encode($old['breed_id'] ?? '') ?>;
 
 function filterBreeds() {
     const catId = categorySel.value;
@@ -191,11 +177,11 @@ categorySel.addEventListener('change', filterBreeds);
 if (categorySel.value) filterBreeds(); // restore on validation fail
 
 // ── Image upload preview ──────────────────────────────────────────────────
-const uploadArea    = document.getElementById('imageUploadArea');
-const fileInput     = document.getElementById('pet_images');
-const previewGrid   = document.getElementById('imagePreviewGrid');
-const MAX_FILES     = 5;
-const MAX_SIZE      = 2 * 1024 * 1024;
+const uploadArea = document.getElementById('imageUploadArea');
+const fileInput = document.getElementById('pet_images');
+const previewGrid = document.getElementById('imagePreviewGrid');
+const MAX_FILES = 5;
+const MAX_SIZE = 2 * 1024 * 1024;
 let   selectedFiles = [];
 
 uploadArea.addEventListener('click', () => fileInput.click());
