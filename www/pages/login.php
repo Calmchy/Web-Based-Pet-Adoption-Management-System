@@ -13,31 +13,23 @@
 ?>
 
 <main class="auth-wrapper">
-
     <!-- Decorative background blobs -->
     <div class="auth-bg-blob auth-bg-blob--1"></div>
     <div class="auth-bg-blob auth-bg-blob--2"></div>
-
     <div class="auth-card auth-card--sm">
-
         <!-- Paw icon header -->
         <div class="auth-brand-icon">🐾</div>
-
         <div class="auth-header">
             <h2>Welcome Back</h2>
             <p>Sign in to your AdoptME account</p>
         </div>
-
         <?php if ($success): ?>
             <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
         <?php endif; ?>
-
         <?php if ($error): ?>
             <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
-
         <form action="actions/login_action.php" method="POST" class="auth-form">
-
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <div class="input-icon-wrap">
@@ -47,7 +39,6 @@
                            placeholder="juan@email.com" required autofocus>
                 </div>
             </div>
-
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-password input-icon-wrap">
@@ -57,19 +48,14 @@
                     <button type="button" class="toggle-pw" data-target="password">👁</button>
                 </div>
             </div>
-
             <button type="submit" class="btn-primary btn-full">
                 Sign In &rarr;
             </button>
-
         </form>
-
         <div class="auth-divider"><span>or</span></div>
-
         <p class="auth-switch">
             No account yet? <a href="index.php?page=register">Create one here</a>
         </p>
-
     </div>
 </main>
 
