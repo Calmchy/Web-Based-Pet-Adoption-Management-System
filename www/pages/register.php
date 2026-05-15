@@ -10,19 +10,14 @@
 ?>
 
 <main class="auth-wrapper">
-
     <div class="auth-bg-blob auth-bg-blob--1"></div>
     <div class="auth-bg-blob auth-bg-blob--2"></div>
-
     <div class="auth-card">
-
         <div class="auth-brand-icon">🐾</div>
-
         <div class="auth-header">
             <h2>Create Account</h2>
             <p>Join AdoptME and find your perfect companion</p>
         </div>
-
         <?php if (!empty($errors)): ?>
             <div class="alert alert-error">
                 <ul>
@@ -32,10 +27,7 @@
                 </ul>
             </div>
         <?php endif; ?>
-
         <form action="actions/register_action.php" method="POST" enctype="multipart/form-data" class="auth-form">
-            
-            <!-- Profile Image -->
             <fieldset>
                 <legend>🖼️ Profile Photo</legend>
                 <div class="form-group">
@@ -52,11 +44,8 @@
                     </div>
                 </div>
             </fieldset>
-
-            <!-- Personal Information -->
             <fieldset>
                 <legend>👤 Personal Information</legend>
-
                 <div class="form-row-3">
                     <div class="form-group">
                         <label for="first_name">First Name <span class="required">*</span></label>
@@ -64,14 +53,12 @@
                                value="<?= htmlspecialchars($old['first_name'] ?? '') ?>"
                                placeholder="Juan" required>
                     </div>
-
                     <div class="form-group">
                         <label for="middle_name">Middle Name</label>
                         <input type="text" id="middle_name" name="middle_name"
                                value="<?= htmlspecialchars($old['middle_name'] ?? '') ?>"
                                placeholder="Santos (optional)">
                     </div>
-
                     <div class="form-group">
                         <label for="last_name">Last Name <span class="required">*</span></label>
                         <input type="text" id="last_name" name="last_name"
@@ -79,7 +66,6 @@
                                placeholder="Dela Cruz" required>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email">Email Address <span class="required">*</span></label>
@@ -87,7 +73,6 @@
                                value="<?= htmlspecialchars($old['email'] ?? '') ?>"
                                placeholder="juan@email.com" required>
                     </div>
-
                     <div class="form-group">
                         <label for="phone_number">Phone Number</label>
                         <input type="text" id="phone_number" name="phone_number"
@@ -96,11 +81,8 @@
                     </div>
                 </div>
             </fieldset>
-
-            <!-- Address -->
             <fieldset>
                 <legend>📍 Address</legend>
-
                 <div class="form-row">
                     <div class="form-group">
                         <label for="brgy_or_street">Barangay / Street <span class="required">*</span></label>
@@ -108,7 +90,6 @@
                                value="<?= htmlspecialchars($old['brgy_or_street'] ?? '') ?>"
                                placeholder="Brgy. San Antonio" required>
                     </div>
-
                     <div class="form-group">
                         <label for="municipality">Municipality / City <span class="required">*</span></label>
                         <input type="text" id="municipality" name="municipality"
@@ -117,11 +98,8 @@
                     </div>
                 </div>
             </fieldset>
-
-            <!-- Password -->
             <fieldset>
                 <legend>🔒 Password</legend>
-
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password">Password <span class="required">*</span></label>
@@ -143,17 +121,13 @@
                     </div>
                 </div>
             </fieldset>
-
             <button type="submit" class="btn-primary btn-full">
                 Create My Account &rarr;
             </button>
-
         </form>
-
         <p class="auth-switch">
             Already have an account? <a href="index.php?page=login">Sign in here</a>
         </p>
-
     </div>
 </main>
 
