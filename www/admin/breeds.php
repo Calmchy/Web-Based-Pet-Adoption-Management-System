@@ -6,7 +6,7 @@ require_once "../includes/auth.php";
 require_role('admin');
 
 $flash_success = $_SESSION['admin_success'] ?? null;
-$flash_error   = $_SESSION['admin_error']   ?? null;
+$flash_error = $_SESSION['admin_error']   ?? null;
 unset($_SESSION['admin_success'], $_SESSION['admin_error']);
 
 // Fetch breeds with category name
@@ -35,11 +35,8 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
 <div class="admin-layout">
-
     <?php include "includes/sidebar.php"; ?>
-
     <div class="admin-main">
-
         <div class="topbar">
             <div class="topbar-left">
                 <button class="sidebar-toggle" id="sidebarToggle"><span></span><span></span><span></span></button>
@@ -53,24 +50,19 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
         </div>
-
         <div class="page-content">
-
             <?php if ($flash_success): ?>
                 <div class="alert alert-success"><?= htmlspecialchars($flash_success) ?></div>
             <?php endif; ?>
             <?php if ($flash_error): ?>
                 <div class="alert alert-error"><?= htmlspecialchars($flash_error) ?></div>
             <?php endif; ?>
-
             <?php if (empty($categories)): ?>
                 <div class="alert alert-error">
                     ⚠️ No categories found. <a href="categories.php" style="color:inherit;font-weight:700;">Add a category first</a> before adding breeds.
                 </div>
             <?php endif; ?>
-
             <div class="two-col-layout">
-
                 <!-- Add Breed Form -->
                 <div class="panel">
                     <div class="panel-header">
@@ -98,7 +90,6 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                         </form>
                     </div>
                 </div>
-
                 <!-- Breeds List -->
                 <div class="panel">
                     <div class="panel-header">
@@ -143,7 +134,6 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                         </div>
                     <?php endif; ?>
                 </div>
-
             </div>
         </div>
     </div>
