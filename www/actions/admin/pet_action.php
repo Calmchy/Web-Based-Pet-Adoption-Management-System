@@ -14,27 +14,27 @@ $action = $_POST['action'] ?? '';
 
 // ── ADD ───────────────────────────────────────────────────────────────────
 if ($action === 'add') {
-    $name        = trim($_POST['name']        ?? '');
-    $gender      = $_POST['gender']           ?? '';
-    $breed_id    = (int)($_POST['breed_id']   ?? 0);
-    $age         = $_POST['age'] !== '' ? (int)$_POST['age'] : null;
-    $status      = $_POST['status']           ?? 'available';
+    $name = trim($_POST['name'] ?? '');
+    $gender = $_POST['gender'] ?? '';
+    $breed_id = (int)($_POST['breed_id']   ?? 0);
+    $age = $_POST['age'] !== '' ? (int)$_POST['age'] : null;
+    $status = $_POST['status'] ?? 'available';
     $description = trim($_POST['description'] ?? '');
-    $created_by  = $_SESSION['user_id'];
+    $created_by = $_SESSION['user_id'];
 
     $old = compact('name','gender','breed_id','age','status','description');
     $old['category_id'] = (int)($_POST['category_id'] ?? 0);
 
     // Validate
     $errors = [];
-    if (empty($name))                                          $errors[] = "Pet name is required.";
-    if (!in_array($gender, ['male','female']))                 $errors[] = "Gender is required.";
-    if ($breed_id === 0)                                       $errors[] = "Please select a breed.";
+    if (empty($name)) $errors[] = "Pet name is required.";
+    if (!in_array($gender, ['male','female'])) $errors[] = "Gender is required.";
+    if ($breed_id === 0) $errors[] = "Please select a breed.";
     if (!in_array($status, ['available','pending','adopted'])) $errors[] = "Invalid status.";
 
     if (!empty($errors)) {
         $_SESSION['admin_error'] = implode(' ', $errors);
-        $_SESSION['admin_old']   = $old;
+        $_SESSION['admin_old'] = $old;
         header("Location: ../../admin/add_pet.php");
         exit();
     }
@@ -48,7 +48,7 @@ if ($action === 'add') {
 
     if (!$stmt->execute()) {
         $_SESSION['admin_error'] = "Failed to add pet. Please try again.";
-        $_SESSION['admin_old']   = $old;
+        $_SESSION['admin_old'] = $old;
         header("Location: ../../admin/add_pet.php");
         exit();
     }
@@ -61,7 +61,7 @@ if ($action === 'add') {
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0775, true);
 
     $allowed_mime = ['image/jpeg','image/png','image/webp'];
-    $max_size     = 2 * 1024 * 1024;
+    $max_size = 2 * 1024 * 1024;
     $upload_errors = [];
 
     if (!empty($_FILES['pet_images']['name'][0])) {
@@ -71,15 +71,15 @@ if ($action === 'add') {
 
         for ($i = 0; $i < $count; $i++) {
             if ($files['error'][$i] !== UPLOAD_ERR_OK) continue;
-            if ($files['size'][$i]  > $max_size)       { $upload_errors[] = "{$files['name'][$i]} exceeds 2MB."; continue; }
+            if ($files['size'][$i] > $max_size) { $upload_errors[] = "{$files['name'][$i]} exceeds 2MB."; continue; }
 
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $mime  = $finfo->file($files['tmp_name'][$i]);
             if (!in_array($mime, $allowed_mime)) { $upload_errors[] = "{$files['name'][$i]} is not a valid image."; continue; }
 
-            $ext      = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
+            $ext = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
             $filename = 'pet_' . $pet_id . '_' . uniqid() . '.' . $ext;
-            $dest     = $upload_dir . $filename;
+            $dest = $upload_dir . $filename;
 
             if (move_uploaded_file($files['tmp_name'][$i], $dest)) {
                 $path = 'assets/uploads/pets/' . $filename;
