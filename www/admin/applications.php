@@ -51,10 +51,8 @@ $where  = $filter ? "WHERE a.status = '$filter'" : '';
 $applications = [];
 $q = $conn->query("
     SELECT a.application_id, a.status, a.applied_at, a.message, a.reviewed_at,
-           CONCAT(u.first_name, ' ', u.last_name) AS applicant,
-           u.email AS applicant_email,
-           p.name AS pet_name, p.pet_id,
-           CONCAT(r.first_name, ' ', r.last_name) AS reviewer
+    CONCAT(u.first_name, ' ', u.last_name) AS applicant, u.email AS applicant_email,
+    p.name AS pet_name, p.pet_id, CONCAT(r.first_name, ' ', r.last_name) AS reviewer
     FROM applications a
     JOIN users u ON u.user_id = a.user_id
     JOIN pets p  ON p.pet_id  = a.pet_id
@@ -76,8 +74,8 @@ if ($qc) {
     }
 }
 
-$admin_name   = ($_SESSION['first_name'] ?? '') . ' ' . ($_SESSION['last_name'] ?? '');
-$admin_init   = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
+$admin_name = ($_SESSION['first_name'] ?? '') . ' ' . ($_SESSION['last_name'] ?? '');
+$admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
 $pending_count = $counts['pending'];
 ?>
 <!DOCTYPE html>
@@ -128,13 +126,9 @@ $pending_count = $counts['pending'];
     </style>
 </head>
 <body>
-
 <div class="admin-layout">
-
     <?php include "includes/sidebar.php"; ?>
-
     <div class="admin-main">
-
         <div class="topbar">
             <div class="topbar-left">
                 <h1>Applications</h1>
@@ -145,16 +139,13 @@ $pending_count = $counts['pending'];
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
         </div>
-
         <div class="page-content">
-
             <?php if ($flash_success): ?>
                 <div class="alert alert-success"><?= htmlspecialchars($flash_success) ?></div>
             <?php endif; ?>
             <?php if ($flash_error): ?>
                 <div class="alert alert-error"><?= htmlspecialchars($flash_error) ?></div>
             <?php endif; ?>
-
             <!-- Filter Tabs -->
             <div class="filter-tabs">
                 <a href="applications.php" class="filter-tab <?= $filter === '' ? 'active' : '' ?>">
@@ -170,12 +161,10 @@ $pending_count = $counts['pending'];
                     ❌ Rejected <span class="count"><?= $counts['rejected'] ?></span>
                 </a>
             </div>
-
             <div class="panel">
                 <div class="panel-header">
                     <h3>Applications (<?= count($applications) ?>)</h3>
                 </div>
-
                 <?php if (empty($applications)): ?>
                     <div class="empty-state">
                         <div class="empty-icon">📭</div>
@@ -257,7 +246,6 @@ $pending_count = $counts['pending'];
                     </table>
                 <?php endif; ?>
             </div>
-
         </div>
     </div>
 </div>
