@@ -8,16 +8,15 @@ require_role('admin');
 
 // ── Handle status flash messages ──────────────────────────────────────────
 $flash_success = $_SESSION['admin_success'] ?? null;
-$flash_error   = $_SESSION['admin_error']   ?? null;
+$flash_error = $_SESSION['admin_error'] ?? null;
 unset($_SESSION['admin_success'], $_SESSION['admin_error']);
 
 // ── Fetch all pets ────────────────────────────────────────────────────────
 $pets = [];
 $q = $conn->query("
-    SELECT p.pet_id, p.name, p.age, p.gender, p.status, p.created_at,
-           b.breed_name, c.category_name
+    SELECT p.pet_id, p.name, p.age, p.gender, p.status, p.created_at, b.breed_name, c.category_name
     FROM pets p
-    LEFT JOIN breeds b     ON b.breed_id    = p.breed_id
+    LEFT JOIN breeds b ON b.breed_id = p.breed_id
     LEFT JOIN categories c ON c.category_id = b.category_id
     ORDER BY p.created_at DESC
 ");
@@ -41,13 +40,9 @@ if ($q) $pending_count = $q->fetch_assoc()['c'];
     <link rel="shortcut icon" href="../assets/images/logo2.png" type="image/x-icon">
 </head>
 <body>
-
 <div class="admin-layout">
-
     <?php include "includes/sidebar.php"; ?>
-
     <div class="admin-main">
-
         <div class="topbar">
             <div class="topbar-left">
                 <h1>Pets</h1>
@@ -58,9 +53,7 @@ if ($q) $pending_count = $q->fetch_assoc()['c'];
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
         </div>
-
         <div class="page-content">
-
             <?php if ($flash_success): ?>
                 <div class="alert alert-success"><?= htmlspecialchars($flash_success) ?></div>
             <?php endif; ?>
@@ -72,7 +65,6 @@ if ($q) $pending_count = $q->fetch_assoc()['c'];
                 <div class="panel-header">
                     <h3>🐾 All Pets (<?= count($pets) ?>)</h3>
                 </div>
-
                 <?php if (empty($pets)): ?>
                     <div class="empty-state">
                         <div class="empty-icon">🐾</div>
@@ -115,7 +107,6 @@ if ($q) $pending_count = $q->fetch_assoc()['c'];
                     </table>
                 <?php endif; ?>
             </div>
-
         </div>
     </div>
 </div>
