@@ -21,11 +21,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <nav class="sidebar-nav">
         <div class="nav-section-label">Main</div>
-        <a href="dashboard.php"    class="<?= $current_page === 'dashboard.php'    ? 'active' : '' ?>"><span class="nav-icon">🏠</span> Dashboard</a>
-        <a href="pets.php"         class="<?= $current_page === 'pets.php'         ? 'active' : '' ?>"><span class="nav-icon">🐾</span> Pets</a>
-        <a href="add_pet.php"      class="<?= $current_page === 'add_pet.php'      ? 'active' : '' ?>"><span class="nav-icon">➕</span> Add Pet</a>
-        <a href="categories.php"   class="<?= $current_page === 'categories.php'   ? 'active' : '' ?>"><span class="nav-icon">🏷️</span> Categories</a>
-        <a href="breeds.php"       class="<?= $current_page === 'breeds.php'       ? 'active' : '' ?>"><span class="nav-icon">🐶</span> Breeds</a>
+        <a href="dashboard.php" class="<?= $current_page === 'dashboard.php' ? 'active' : '' ?>"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="pets.php" class="<?= $current_page === 'pets.php' ? 'active' : '' ?>"><span class="nav-icon">🐾</span> Pets</a>
+        <a href="add_pet.php" class="<?= $current_page === 'add_pet.php' ? 'active' : '' ?>"><span class="nav-icon">➕</span> Add Pet</a>
+        <a href="categories.php" class="<?= $current_page === 'categories.php' ? 'active' : '' ?>"><span class="nav-icon">🏷️</span> Categories</a>
+        <a href="breeds.php" class="<?= $current_page === 'breeds.php' ? 'active' : '' ?>"><span class="nav-icon">🐶</span> Breeds</a>
         <a href="applications.php" class="<?= $current_page === 'applications.php' ? 'active' : '' ?>">
             <span class="nav-icon">📋</span> Applications
             <?php if ($pending_count > 0): ?>
