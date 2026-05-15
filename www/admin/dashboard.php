@@ -8,12 +8,12 @@ require_role('admin');
 
 // ── Stats ──────────────────────────────────────────────────────────────────
 $stats = [
-    'total_pets'       => 0,
-    'available_pets'   => 0,
-    'total_users'      => 0,
-    'total_apps'       => 0,
-    'pending_apps'     => 0,
-    'approved_apps'    => 0,
+    'total_pets' => 0,
+    'available_pets' => 0,
+    'total_users' => 0,
+    'total_apps' => 0,
+    'pending_apps' => 0,
+    'approved_apps'  => 0,
 ];
 
 $q = $conn->query("SELECT COUNT(*) as c FROM pets");
@@ -37,12 +37,11 @@ if ($q) $stats['approved_apps'] = $q->fetch_assoc()['c'];
 // ── Recent Applications ────────────────────────────────────────────────────
 $recent_apps = [];
 $q = $conn->query("
-    SELECT a.application_id, a.status, a.applied_at,
-           CONCAT(u.first_name, ' ', u.last_name) AS applicant,
-           p.name AS pet_name
+    SELECT a.application_id, a.status, a.applied_at, CONCAT(u.first_name, ' ',
+    u.last_name) AS applicant, p.name AS pet_name
     FROM applications a
     JOIN users u ON u.user_id = a.user_id
-    JOIN pets p  ON p.pet_id  = a.pet_id
+    JOIN pets p ON p.pet_id  = a.pet_id
     ORDER BY a.applied_at DESC
     LIMIT 8
 ");
@@ -51,10 +50,9 @@ if ($q) $recent_apps = $q->fetch_all(MYSQLI_ASSOC);
 // ── Recent Pets ────────────────────────────────────────────────────────────
 $recent_pets = [];
 $q = $conn->query("
-    SELECT p.pet_id, p.name, p.gender, p.status, p.created_at,
-           b.breed_name, c.category_name
+    SELECT p.pet_id, p.name, p.gender, p.status, p.created_at, b.breed_name, c.category_name
     FROM pets p
-    LEFT JOIN breeds b     ON b.breed_id    = p.breed_id
+    LEFT JOIN breeds b ON b.breed_id = p.breed_id
     LEFT JOIN categories c ON c.category_id = b.category_id
     ORDER BY p.created_at DESC
     LIMIT 6
@@ -74,14 +72,10 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
     <link rel="shortcut icon" href="../assets/images/logo.png" type="image/x-icon">
 </head>
 <body>
-
 <div class="admin-layout">
-
     <?php include "includes/sidebar.php"; ?>
-
     <!-- Main -->
     <div class="admin-main">
-
         <!-- Topbar -->
         <div class="topbar">
             <div class="topbar-left">
@@ -93,10 +87,8 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
         </div>
-
         <!-- Page Content -->
         <div class="page-content">
-
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
@@ -135,10 +127,8 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                     </div>
                 </div>
             </div>
-
             <!-- Tables Grid -->
             <div class="content-grid">
-
                 <!-- Recent Applications -->
                 <div class="panel">
                     <div class="panel-header">
@@ -179,7 +169,6 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                         </table>
                     <?php endif; ?>
                 </div>
-
                 <!-- Recent Pets -->
                 <div class="panel">
                     <div class="panel-header">
@@ -222,7 +211,6 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                         </table>
                     <?php endif; ?>
                 </div>
-
             </div>
         </div>
     </div>
