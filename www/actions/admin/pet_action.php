@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $action = $_POST['action'] ?? '';
 
-// ── ADD ───────────────────────────────────────────────────────────────────
+// ############ ADD ############
 if ($action === 'add') {
     $name = trim($_POST['name'] ?? '');
     $gender = trim($_POST['gender'] ?? '');
@@ -25,7 +25,7 @@ if ($action === 'add') {
     $old = compact('name','gender','breed_id','age','status','description');
     $old['category_id'] = (int)($_POST['category_id'] ?? 0);
 
-    // Validate
+    // ############ Validate ############
     $errors = [];
     if (empty($name)) $errors[] = "Pet name is required.";
     if (!in_array($gender, ['male','female'])) $errors[] = "Gender is required.";
@@ -39,7 +39,7 @@ if ($action === 'add') {
         exit();
     }
 
-    // Insert pet
+    // ############ Insert pet ############
     $stmt = $conn->prepare("
         INSERT INTO pets (name, age, gender, description, status, breed_id, created_by)
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -56,7 +56,7 @@ if ($action === 'add') {
     $pet_id = $conn->insert_id;
     $stmt->close();
 
-    // Handle image uploads
+    // ############ Handle image uploads ############
     $upload_dir = __DIR__ . '/../../assets/uploads/pets/';
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0775, true);
 
