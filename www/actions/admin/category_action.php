@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $action = $_POST['action'] ?? '';
 
-// ── ADD ───────────────────────────────────────────────────────────────────
+// ############ ADD ############
 if ($action === 'add') {
     $name = trim($_POST['category_name'] ?? '');
 
@@ -22,7 +22,7 @@ if ($action === 'add') {
         exit();
     }
 
-    // Check duplicate
+    // ############ Check duplicate ############
     $stmt = $conn->prepare("SELECT category_id FROM categories WHERE LOWER(category_name) = LOWER(?)");
     $stmt->bind_param("s", $name);
     $stmt->execute();
@@ -45,7 +45,7 @@ if ($action === 'add') {
     $stmt->close();
 }
 
-// ── DELETE ────────────────────────────────────────────────────────────────
+// ############ DELETE ############
 if ($action === 'delete') {
     $id = (int)($_POST['category_id'] ?? 0);
     if ($id > 0) {
