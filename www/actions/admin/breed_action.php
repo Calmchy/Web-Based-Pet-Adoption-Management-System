@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $action = $_POST['action'] ?? '';
 
-// ── ADD ───────────────────────────────────────────────────────────────────
+// ############ ADD ############
 if ($action === 'add') {
-    $name    = trim($_POST['breed_name']   ?? '');
-    $cat_id  = (int)($_POST['category_id'] ?? 0);
+    $name = trim($_POST['breed_name']   ?? '');
+    $cat_id = (int)($_POST['category_id'] ?? 0);
 
     if (empty($name) || $cat_id === 0) {
         $_SESSION['admin_error'] = "Breed name and category are required.";
@@ -23,7 +23,7 @@ if ($action === 'add') {
         exit();
     }
 
-    // Check duplicate within same category
+    // ############ Check duplicate within same category ############
     $stmt = $conn->prepare("SELECT breed_id FROM breeds WHERE LOWER(breed_name) = LOWER(?) AND category_id = ?");
     $stmt->bind_param("si", $name, $cat_id);
     $stmt->execute();
@@ -46,7 +46,7 @@ if ($action === 'add') {
     $stmt->close();
 }
 
-// ── DELETE ────────────────────────────────────────────────────────────────
+// ############ DELETE ############
 if ($action === 'delete') {
     $id = (int)($_POST['breed_id'] ?? 0);
     if ($id > 0) {
