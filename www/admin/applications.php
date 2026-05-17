@@ -6,7 +6,7 @@ require_once "../includes/auth.php";
 
 require_role('admin');
 
-// ── Handle approve/reject actions ─────────────────────────────────────────
+// ############ Handle approve/reject actions ############
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['application_id'])) {
     $app_id = (int) $_POST['application_id'];
     $action = $_POST['action'];
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['app
         $stmt->bind_param("sii", $action, $_SESSION['user_id'], $app_id);
 
         if ($stmt->execute()) {
-            // If approved, mark pet as adopted
+            // ############ If approved, mark pet as adopted ############
             if ($action === 'approved') {
                 $pet_q = $conn->query("SELECT pet_id FROM applications WHERE application_id = $app_id");
                 if ($pet_q) {
@@ -43,11 +43,11 @@ $flash_success = $_SESSION['admin_success'] ?? null;
 $flash_error   = $_SESSION['admin_error']   ?? null;
 unset($_SESSION['admin_success'], $_SESSION['admin_error']);
 
-// ── Filter ────────────────────────────────────────────────────────────────
+// ############ Filter ############
 $filter = in_array($_GET['status'] ?? '', ['pending','approved','rejected']) ? $_GET['status'] : '';
 $where  = $filter ? "WHERE a.status = '$filter'" : '';
 
-// ── Fetch applications ────────────────────────────────────────────────────
+// ############ Fetch applications ############
 $applications = [];
 $q = $conn->query("
     SELECT a.application_id, a.status, a.applied_at, a.message, a.reviewed_at,
@@ -64,7 +64,7 @@ $q = $conn->query("
 ");
 if ($q) $applications = $q->fetch_all(MYSQLI_ASSOC);
 
-// Count by status
+// ############ Count by status ############
 $counts = ['all' => 0, 'pending' => 0, 'approved' => 0, 'rejected' => 0];
 $qc = $conn->query("SELECT status, COUNT(*) as c FROM applications GROUP BY status");
 if ($qc) {
