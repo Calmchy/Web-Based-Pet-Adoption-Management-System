@@ -2,6 +2,8 @@
 
 mkdir -p www/assets/uploads/profiles
 mkdir -p www/assets/uploads/pets/
+chmod 777 www/assets/uploads/profiles
+chmod 777 www/assets/uploads/pets
 docker exec -it php_app ls -ld /var/www/html/assets/uploads/profiles
 docker exec -it php_app ls -ld /var/www/html/assets/uploads/pets
 
