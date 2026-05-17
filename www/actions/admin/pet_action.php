@@ -57,7 +57,7 @@ if ($action === 'add') {
     $stmt->close();
 
     // Handle image uploads
-    $upload_dir = realpath(__DIR__ . '/../../assets') . '/uploads/pets/';
+    $upload_dir = __DIR__ . '/../../assets/uploads/pets/';
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0775, true);
 
     $allowed_mime = ['image/jpeg','image/png','image/webp'];
