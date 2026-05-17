@@ -41,6 +41,44 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
             <div class="topbar-right">
+                <div class="notif-wrapper" style="position:relative;">
+                    <button class="notif-bell" id="adminNotifBtn" title="Notifications">🔔
+                        <?php
+                        $nq = $conn->prepare("SELECT COUNT(*) as c FROM notifications WHERE user_id = ? AND is_read = 0");
+                        $nq->bind_param("i", $_SESSION['user_id']);
+                        $nq->execute();
+                        $nc = $nq->get_result()->fetch_assoc()['c'];
+                        $nq->close();
+                        if ($nc > 0): ?>
+                            <span class="notif-badge"><?= $nc ?></span>
+                        <?php endif; ?>
+                    </button>
+                    <div class="notif-dropdown" id="adminNotifDropdown">
+                        <div class="notif-header">
+                            <h4>🔔 Notifications</h4>
+                            <button class="notif-mark-read" id="adminMarkAllRead">Mark all read</button>
+                        </div>
+                        <div class="notif-list" id="adminNotifList">
+                        <?php
+                        $nq2 = $conn->prepare("SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC LIMIT 10");
+                        $nq2->bind_param("i", $_SESSION['user_id']);
+                        $nq2->execute();
+                        $notifs = $nq2->get_result()->fetch_all(MYSQLI_ASSOC);
+                        $nq2->close();
+                        if (empty($notifs)): ?>
+                            <div class="notif-empty">No notifications yet</div>
+                        <?php else: foreach ($notifs as $n): ?>
+                            <div class="notif-item <?= $n['is_read'] ? '' : 'unread' ?>">
+                                <span class="notif-icon">🐾</span>
+                                <div class="notif-text">
+                                    <p><?= htmlspecialchars($n['message']) ?></p>
+                                    <span><?= date('M d, g:i A', strtotime($n['created_at'])) ?></span>
+                                </div>
+                            </div>
+                        <?php endforeach; endif; ?>
+                        </div>
+                    </div>
+                </div>
                 <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
