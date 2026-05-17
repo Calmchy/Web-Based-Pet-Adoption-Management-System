@@ -2,9 +2,20 @@
 -- adoptme: web-based pet adoption management system
 -- submitted by: chyril s. manatad | reynaldo f. balais
 
-create database if not exists adoptme;
+create database adoptme;
 
 use adoptme;
+
+create table address (
+    address_id int auto_increment primary key,
+    sitio_purok varchar(100),
+    subdivision_name varchar(100),
+    barangay_name varchar(100) not null,
+    city_town varchar(100) not null,
+    province varchar(100) not null,
+    region varchar(100) not null,
+    zip_code varchar(10) not null
+);
 
 create table users (
     user_id int auto_increment primary key,
@@ -16,17 +27,11 @@ create table users (
     phone_number varchar(20),
     role enum('admin', 'adopter') not null default 'adopter',
     profile_image varchar(255),
-    created_at timestamp default current_timestamp
-);
-
-create table address (
-    address_id int auto_increment primary key,
-    user_id int not null,
-    brgy_or_street varchar(100) not null,
-    municipality varchar(100) not null,
-    
-    foreign key (user_id) references users(user_id)
-        on delete cascade
+    address_id int,
+    created_at timestamp default current_timestamp,
+    foreign key (address_id) references address(address_id)
+        on delete set null
+        on update cascade
 );
 
 create table categories (
@@ -38,7 +43,6 @@ create table breeds (
     breed_id int auto_increment primary key,
     breed_name varchar(50) not null,
     category_id int,
-
     foreign key (category_id) references categories(category_id)
         on delete set null
         on update cascade
@@ -54,20 +58,17 @@ create table pets (
     breed_id int,
     created_by int,
     created_at timestamp default current_timestamp,
-    
-    foreign key (breed_id) references breeds(breed_id) 
+    foreign key (breed_id) references breeds(breed_id)
         on delete set null
         on update cascade,
     foreign key (created_by) references users(user_id)
-        on delete set null
-        on update cascade
+        on delete set null on update cascade
 );
 
 create table pet_images (
     image_id int auto_increment primary key,
     pet_id int not null,
     image_path varchar(255),
-
     foreign key (pet_id) references pets(pet_id)
         on delete cascade
         on update cascade
@@ -82,7 +83,6 @@ create table applications (
     applied_at timestamp default current_timestamp,
     reviewed_at timestamp null,
     reviewed_by int,
-
     foreign key (user_id) references users(user_id)
         on delete cascade
         on update cascade,
@@ -94,13 +94,32 @@ create table applications (
         on update cascade
 );
 
+create table notifications (
+    notification_id int auto_increment primary key,
+    user_id int not null,
+    pet_id int,
+    application_id int,
+    type varchar(50) not null,
+    message text not null,
+    is_read boolean default false,
+    created_at timestamp default current_timestamp,
+    foreign key (user_id) references users(user_id)
+        on delete cascade
+        on update cascade,
+    foreign key (pet_id) references pets(pet_id)
+        on delete set null
+        on update cascade,
+    foreign key (application_id) references applications(application_id)
+        on delete set null
+        on update cascade
+);
+
 create table logs (
     log_id int auto_increment primary key,
     user_id int,
     action varchar(100),
     description text,
     created_at timestamp default current_timestamp,
-
     foreign key (user_id) references users(user_id)
         on delete set null
         on update cascade
