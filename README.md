@@ -2,7 +2,7 @@
 
 | Feature | Status |
 |----------|---------|
-| User Authentication | ✅ Completed |
+| User Authentication | 🚧 In Progress |
 | Pet Management | ⏳ Pending |
 | Pet Adoption System | 🚧 In Progress |
 | Admin Dashboard | 🚧 In Progress |
