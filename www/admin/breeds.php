@@ -9,7 +9,7 @@ $flash_success = $_SESSION['admin_success'] ?? null;
 $flash_error = $_SESSION['admin_error']   ?? null;
 unset($_SESSION['admin_success'], $_SESSION['admin_error']);
 
-// Fetch breeds with category name
+// ############ Fetch breeds with category name ############
 $breeds = [];
 $q = $conn->query("
     SELECT b.breed_id, b.breed_name, c.category_name, c.category_id
@@ -19,7 +19,7 @@ $q = $conn->query("
 ");
 if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
 
-// Fetch categories for dropdown
+// ############ Fetch categories for dropdown ############
 $categories = [];
 $q = $conn->query("SELECT category_id, category_name FROM categories ORDER BY category_name ASC");
 if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
@@ -101,7 +101,7 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                 </div>
             <?php endif; ?>
             <div class="two-col-layout">
-                <!-- Add Breed Form -->
+                <!-- ############ Add Breed Form ############ -->
                 <div class="panel">
                     <div class="panel-header">
                         <h3>🐶 Add New Breed</h3>
@@ -128,7 +128,7 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                         </form>
                     </div>
                 </div>
-                <!-- Breeds List -->
+                <!-- ############ Breeds List ############ -->
                 <div class="panel">
                     <div class="panel-header">
                         <h3>All Breeds (<?= count($breeds) ?>)</h3>
