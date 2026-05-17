@@ -14,4 +14,3 @@
 </head>
 <body>
     <?php include "includes/navbar.php"; ?>
-    <script src="assets/js/darkmode.js"></script>
