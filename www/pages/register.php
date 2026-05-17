@@ -85,16 +85,52 @@
                 <legend>📍 Address</legend>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="brgy_or_street">Barangay / Street <span class="required">*</span></label>
-                        <input type="text" id="brgy_or_street" name="brgy_or_street"
-                               value="<?= htmlspecialchars($old['brgy_or_street'] ?? '') ?>"
+                        <label for="sitio_purok">Sitio / Purok</label>
+                        <input type="text" id="sitio_purok" name="sitio_purok"
+                               value="<?= htmlspecialchars($old['sitio_purok'] ?? '') ?>"
+                               placeholder="Sitio Mabini (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="subdivision_name">Subdivision</label>
+                        <input type="text" id="subdivision_name" name="subdivision_name"
+                               value="<?= htmlspecialchars($old['subdivision_name'] ?? '') ?>"
+                               placeholder="Subdivision name (optional)">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="barangay_name">Barangay <span class="required">*</span></label>
+                        <input type="text" id="barangay_name" name="barangay_name"
+                               value="<?= htmlspecialchars($old['barangay_name'] ?? '') ?>"
                                placeholder="Brgy. San Antonio" required>
                     </div>
                     <div class="form-group">
-                        <label for="municipality">Municipality / City <span class="required">*</span></label>
-                        <input type="text" id="municipality" name="municipality"
-                               value="<?= htmlspecialchars($old['municipality'] ?? '') ?>"
-                               placeholder="Abuyog, Leyte" required>
+                        <label for="city_town">City / Town <span class="required">*</span></label>
+                        <input type="text" id="city_town" name="city_town"
+                               value="<?= htmlspecialchars($old['city_town'] ?? '') ?>"
+                               placeholder="Abuyog" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="province">Province <span class="required">*</span></label>
+                        <input type="text" id="province" name="province"
+                               value="<?= htmlspecialchars($old['province'] ?? '') ?>"
+                               placeholder="Leyte" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="region">Region <span class="required">*</span></label>
+                        <input type="text" id="region" name="region"
+                               value="<?= htmlspecialchars($old['region'] ?? '') ?>"
+                               placeholder="Region VIII" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zip_code">ZIP Code <span class="required">*</span></label>
+                        <input type="text" id="zip_code" name="zip_code"
+                               value="<?= htmlspecialchars($old['zip_code'] ?? '') ?>"
+                               placeholder="6510" required maxlength="10">
                     </div>
                 </div>
             </fieldset>
