@@ -20,6 +20,35 @@
         if (overlayEl) overlayEl.addEventListener('click', close);
         document.querySelectorAll('.sidebar-nav a').forEach(a => a.addEventListener('click', close));
     }
+
+    // Notification bell toggle
+    const notifBtn      = document.getElementById('adminNotifBtn');
+    const notifDropdown = document.getElementById('adminNotifDropdown');
+    const markAllBtn    = document.getElementById('adminMarkAllRead');
+
+    if (notifBtn && notifDropdown) {
+        notifBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            notifDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', e => {
+            if (!notifBtn.contains(e.target) && !notifDropdown.contains(e.target)) {
+                notifDropdown.classList.remove('open');
+            }
+        });
+    }
+
+    if (markAllBtn) {
+        markAllBtn.addEventListener('click', () => {
+            fetch('../../actions/admin/mark_notifications_read.php', { method: 'POST' })
+                .then(() => {
+                    document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
+                    const badge = document.querySelector('.notif-badge');
+                    if (badge) badge.remove();
+                    notifDropdown.classList.remove('open');
+                });
+        });
+    }
 })();
 </script>
 </body>
