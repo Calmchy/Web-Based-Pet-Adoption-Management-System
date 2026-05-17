@@ -9,12 +9,12 @@ $flash_error = $_SESSION['admin_error'] ?? null;
 $old = $_SESSION['admin_old'] ?? [];
 unset($_SESSION['admin_error'], $_SESSION['admin_old']);
 
-// Fetch categories for the category dropdown
+// ############ Fetch categories for the category dropdown ############
 $categories = [];
 $q = $conn->query("SELECT category_id, category_name FROM categories ORDER BY category_name ASC");
 if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
 
-// Fetch ALL breeds — JS will filter by selected category
+// ############ Fetch ALL breeds — JS will filter by selected category ############
 $breeds = [];
 $q = $conn->query("SELECT breed_id, breed_name, category_id FROM breeds ORDER BY breed_name ASC");
 if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
@@ -96,7 +96,7 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                     <form action="../actions/admin/pet_action.php" method="POST"
                           enctype="multipart/form-data" class="admin-form">
                         <input type="hidden" name="action" value="add">
-                        <!-- Name + Gender -->
+                        <!-- ############ Name + Gender ############ -->
                         <div class="form-row-2">
                             <div class="form-group">
                                 <label for="name">Pet Name <span class="req">*</span></label>
@@ -113,7 +113,7 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                 </select>
                             </div>
                         </div>
-                        <!-- Category + Breed -->
+                        <!-- ############ Category + Breed ############ -->
                         <div class="form-row-2">
                             <div class="form-group">
                                 <label for="category_id">Category <span class="req">*</span></label>
@@ -134,7 +134,7 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                 </select>
                             </div>
                         </div>
-                        <!-- Age + Status -->
+                        <!-- ############ Age + Status ############ -->
                         <div class="form-row-2">
                             <div class="form-group">
                                 <label for="age">Age (years)</label>
@@ -151,14 +151,14 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
                                 </select>
                             </div>
                         </div>
-                        <!-- Description -->
+                        <!-- ############ Description ############ -->
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea id="description" name="description"
                                       placeholder="Personality, health notes, special needs..."
                                       rows="4"><?= htmlspecialchars($old['description'] ?? '') ?></textarea>
                         </div>
-                        <!-- Images -->
+                        <!-- ############ Images ############ -->
                         <div class="form-group">
                             <label>Photos (up to 5 · JPG, PNG, WEBP · Max 2MB each)</label>
                             <div class="image-upload-area" id="imageUploadArea">
@@ -185,7 +185,7 @@ if ($q) $breeds = $q->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <script>
-// ── Breed filter by category ──────────────────────────────────────────────
+// ############ Breed filter by category ############
 const allBreeds = <?= json_encode($breeds) ?>;
 const categorySel = document.getElementById('category_id');
 const breedSel = document.getElementById('breed_id');
@@ -212,9 +212,9 @@ function filterBreeds() {
 }
 
 categorySel.addEventListener('change', filterBreeds);
-if (categorySel.value) filterBreeds(); // restore on validation fail
+if (categorySel.value) filterBreeds(); // ############ restore on validation fail ############
 
-// ── Image upload preview ──────────────────────────────────────────────────
+// ############ Image upload preview ############
 const uploadArea = document.getElementById('imageUploadArea');
 const fileInput = document.getElementById('pet_images');
 const previewGrid = document.getElementById('imagePreviewGrid');
@@ -225,7 +225,7 @@ let   selectedFiles = [];
 uploadArea.addEventListener('click', () => fileInput.click());
 
 uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
-uploadArea.addEventListener('dragleave', ()  => uploadArea.classList.remove('drag-over'));
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
 uploadArea.addEventListener('drop', e => {
     e.preventDefault();
     uploadArea.classList.remove('drag-over');
