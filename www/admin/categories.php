@@ -9,7 +9,7 @@ $flash_success = $_SESSION['admin_success'] ?? null;
 $flash_error = $_SESSION['admin_error'] ?? null;
 unset($_SESSION['admin_success'], $_SESSION['admin_error']);
 
-// Fetch all categories with breed count
+// ############ Fetch all categories with breed count ############
 $categories = [];
 $q = $conn->query("
     SELECT c.category_id, c.category_name, COUNT(b.breed_id) AS breed_count
@@ -33,7 +33,7 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
 <div class="admin-layout">
     <?php include "includes/sidebar.php"; ?>
     <div class="admin-main">
-        <!-- Topbar -->
+        <!-- ############ Topbar ############ -->
         <div class="topbar">
             <div class="topbar-left">
                 <button class="sidebar-toggle" id="sidebarToggle"><span></span><span></span><span></span></button>
@@ -55,7 +55,7 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                 <div class="alert alert-error"><?= htmlspecialchars($flash_error) ?></div>
             <?php endif; ?>
             <div class="two-col-layout">
-                <!-- Add Category Form -->
+                <!-- ############ Add Category Form ############ -->
                 <div class="panel">
                     <div class="panel-header">
                         <h3>🏷️ Add New Category</h3>
@@ -72,7 +72,7 @@ if ($q) $categories = $q->fetch_all(MYSQLI_ASSOC);
                         </form>
                     </div>
                 </div>
-                <!-- Categories List -->
+                <!-- ############ Categories List ############ -->
                 <div class="panel">
                     <div class="panel-header">
                         <h3>All Categories (<?= count($categories) ?>)</h3>
