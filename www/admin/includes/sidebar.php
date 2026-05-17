@@ -1,5 +1,5 @@
 <?php
-// Pending count for badge
+// ############ Pending count for badge ############
 $pending_count = 0;
 $_q = $conn->query("SELECT COUNT(*) as c FROM applications WHERE status = 'pending'");
 if ($_q) $pending_count = (int)$_q->fetch_assoc()['c'];
@@ -7,7 +7,7 @@ if ($_q) $pending_count = (int)$_q->fetch_assoc()['c'];
 $admin_name = trim(($_SESSION['first_name'] ?? '') . ' ' . ($_SESSION['last_name'] ?? ''));
 $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
 
-// Current page for active state
+// ############ Current page for active state ############
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <aside class="sidebar" id="sidebar">
