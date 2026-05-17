@@ -6,7 +6,7 @@ require_once "../includes/auth.php";
 
 require_role('admin');
 
-// ── Stats ──────────────────────────────────────────────────────────────────
+// ############ Stats ############
 $stats = [
     'total_pets' => 0,
     'available_pets' => 0,
@@ -34,7 +34,7 @@ if ($q) $stats['pending_apps'] = $q->fetch_assoc()['c'];
 $q = $conn->query("SELECT COUNT(*) as c FROM applications WHERE status = 'approved'");
 if ($q) $stats['approved_apps'] = $q->fetch_assoc()['c'];
 
-// ── Recent Applications ────────────────────────────────────────────────────
+// ############ Recent Applications ############
 $recent_apps = [];
 $q = $conn->query("
     SELECT a.application_id, a.status, a.applied_at, CONCAT(u.first_name, ' ',
@@ -47,7 +47,7 @@ $q = $conn->query("
 ");
 if ($q) $recent_apps = $q->fetch_all(MYSQLI_ASSOC);
 
-// ── Recent Pets ────────────────────────────────────────────────────────────
+// ############ Recent Pets ############
 $recent_pets = [];
 $q = $conn->query("
     SELECT p.pet_id, p.name, p.gender, p.status, p.created_at, b.breed_name, c.category_name
@@ -74,9 +74,9 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
 <body>
 <div class="admin-layout">
     <?php include "includes/sidebar.php"; ?>
-    <!-- Main -->
+    <!-- ############ Main ############ -->
     <div class="admin-main">
-        <!-- Topbar -->
+        <!-- ############ Topbar ############ -->
         <div class="topbar">
             <div class="topbar-left">
                 <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><span></span><span></span><span></span></button>
@@ -126,9 +126,9 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                 <a href="../actions/logout.php" class="logout-btn">🚪 Logout</a>
             </div>
         </div>
-        <!-- Page Content -->
+        <!-- ############ Page Content ############ -->
         <div class="page-content">
-            <!-- Stats -->
+            <!-- ############ Stats ############ -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon orange">🐕</div>
@@ -166,9 +166,9 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                     </div>
                 </div>
             </div>
-            <!-- Tables Grid -->
+            <!-- ############ Tables Grid ############ -->
             <div class="content-grid">
-                <!-- Recent Applications -->
+                <!-- ############ Recent Applications ############ -->
                 <div class="panel">
                     <div class="panel-header">
                         <h3>📋 Recent Applications</h3>
@@ -208,7 +208,7 @@ $admin_init = strtoupper(substr($_SESSION['first_name'] ?? 'A', 0, 1));
                         </table>
                     <?php endif; ?>
                 </div>
-                <!-- Recent Pets -->
+                <!-- ############ Recent Pets ############ -->
                 <div class="panel">
                     <div class="panel-header">
                         <h3>🐾 Recent Pets</h3>
