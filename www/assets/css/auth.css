@@ -1,6 +1,6 @@
-/* ═══════════════════════════════════════
+/* ####################################
    AUTH PAGES — LOGIN & REGISTER
-═══════════════════════════════════════ */
+####################################### */
 
 .auth-wrapper {
     min-height: calc(100vh - 64px);
@@ -12,7 +12,9 @@
     overflow: hidden;
 }
 
-/* Background blobs */
+/* ####################################
+    Background blobs
+####################################### */
 .auth-bg-blob {
     position: absolute;
     border-radius: 50%;
@@ -46,7 +48,9 @@
 
 .auth-card--sm { max-width: 420px; }
 
-/* Brand icon */
+/* ####################################
+    Brand icon
+####################################### */
 .auth-brand-icon {
     text-align: center;
     font-size: 2.4rem;
@@ -54,7 +58,9 @@
     line-height: 1;
 }
 
-/* Header */
+/* ####################################
+    Header
+####################################### */
 .auth-header {
     text-align: center;
     margin-bottom: 1.6rem;
@@ -72,7 +78,9 @@
     margin: 0;
 }
 
-/* Alerts */
+/* ####################################
+    Alerts
+####################################### */
 .alert {
     border-radius: 8px;
     padding: .8rem 1rem;
@@ -83,7 +91,9 @@
 .alert-error   { background: #fdecea; color: #b71c1c; border-left: 4px solid #e53935; }
 .alert-success { background: #e8f5e9; color: #1b5e20; border-left: 4px solid #43a047; }
 
-/* Fieldsets */
+/* ####################################
+    Fieldsets
+####################################### */
 fieldset {
     border: 1px solid var(--border, #e8e8e8);
     border-radius: 10px;
