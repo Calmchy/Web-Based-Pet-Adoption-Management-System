@@ -1,6 +1,6 @@
-/* ═══════════════════════════════════════════════════════
+/* ############################################################
    AdoptME — Admin Panel Styles
-   ═══════════════════════════════════════════════════════ */
+   ############################################################ */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
@@ -58,13 +58,17 @@ body {
     min-height: 100vh;
 }
 
-/* ─── Layout ─────────────────────────────────────────── */
+/* ####################################
+   Layout
+####################################### */
 .admin-layout {
     display: flex;
     min-height: 100vh;
 }
 
-/* ─── Sidebar ────────────────────────────────────────── */
+/* ####################################
+   Sidebar
+####################################### */
 .sidebar {
     width: 260px;
     background: var(--sidebar-bg);
@@ -204,7 +208,9 @@ body {
     letter-spacing: .05em;
 }
 
-/* ─── Main Content ───────────────────────────────────── */
+/* ####################################
+   Main Content
+####################################### */
 .admin-main {
     margin-left: 260px;
     flex: 1;
@@ -213,7 +219,9 @@ body {
     min-height: 100vh;
 }
 
-/* ─── Topbar ─────────────────────────────────────────── */
+/* ####################################
+   Topbar
+####################################### */
 .topbar {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -293,13 +301,17 @@ body.dark-mode .logout-btn {
     border-color: rgba(220,38,38,.3);
 }
 
-/* ─── Page Content ───────────────────────────────────── */
+/* ####################################
+   Page Content
+####################################### */
 .page-content {
     padding: 28px;
     flex: 1;
 }
 
-/* ─── Stats Grid ─────────────────────────────────────── */
+/* ####################################
+   Stats Grid
+####################################### */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -361,7 +373,9 @@ body.dark-mode .stat-icon.purple { background: rgba(168,85,247,.15); }
     font-weight: 500;
 }
 
-/* ─── Content Grid ───────────────────────────────────── */
+/* ####################################
+   Content Grid
+####################################### */
 .content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -373,7 +387,9 @@ body.dark-mode .stat-icon.purple { background: rgba(168,85,247,.15); }
     .content-grid { grid-template-columns: 1fr; }
 }
 
-/* ─── Cards / Panels ─────────────────────────────────── */
+/* ####################################
+   Cards / Panels
+####################################### */
 .panel {
     background: var(--surface);
     border-radius: 14px;
@@ -408,7 +424,9 @@ body.dark-mode .stat-icon.purple { background: rgba(168,85,247,.15); }
 
 .panel-body { padding: 18px 22px; }
 
-/* ─── Table ──────────────────────────────────────────── */
+/* ####################################
+   Table
+####################################### */
 .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -438,7 +456,9 @@ body.dark-mode .stat-icon.purple { background: rgba(168,85,247,.15); }
 
 .data-table tbody tr:hover { background: var(--surface-2); }
 
-/* ─── Badges ─────────────────────────────────────────── */
+/* ####################################
+   Badges
+####################################### */
 .badge {
     display: inline-block;
     padding: 3px 10px;
@@ -461,7 +481,9 @@ body.dark-mode .badge-rejected { background: rgba(239,68,68,.15); color: #fca5a5
 body.dark-mode .badge-available { background: rgba(59,130,246,.15); color: #93c5fd; }
 body.dark-mode .badge-adopted  { background: rgba(168,85,247,.15); color: #d8b4fe; }
 
-/* ─── Action Buttons ─────────────────────────────────── */
+/* ####################################
+   Action Buttons
+####################################### */
 .action-btn {
     display: inline-flex;
     align-items: center;
@@ -508,7 +530,9 @@ body.dark-mode .action-btn-danger {
     color: #fca5a5;
 }
 
-/* ─── Empty State ────────────────────────────────────── */
+/* ####################################
+   Empty State
+####################################### */
 .empty-state {
     text-align: center;
     padding: 40px 20px;
@@ -518,7 +542,9 @@ body.dark-mode .action-btn-danger {
 .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
 .empty-state p { font-size: .9rem; }
 
-/* ─── Alert ──────────────────────────────────────────── */
+/* ####################################
+   Alert
+####################################### */
 .alert {
     padding: 12px 16px;
     border-radius: 10px;
@@ -542,7 +568,9 @@ body.dark-mode .action-btn-danger {
 body.dark-mode .alert-success { background: rgba(34,197,94,.12); color: #86efac; }
 body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5; }
 
-/* ─── Form Styles (admin) ────────────────────────────── */
+/* ####################################
+   Form Styles (admin)
+####################################### */
 .admin-form .form-group {
     margin-bottom: 16px;
 }
@@ -582,7 +610,9 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
 
 .admin-form textarea { resize: vertical; min-height: 90px; }
 
-/* ─── Responsive ─────────────────────────────────────── */
+/* ####################################
+   RESPONSIVE
+####################################### */
 @media (max-width: 768px) {
     .sidebar {
         width: var(--sidebar-w);
@@ -627,9 +657,9 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
     backdrop-filter: blur(1px);
 }
 .sidebar-overlay.show { display: block; }
-/* ═══════════════════════════════════════
+/* ####################################
    TWO-COLUMN LAYOUT (categories/breeds)
-═══════════════════════════════════════ */
+####################################### */
 .two-col-layout {
     display: grid;
     grid-template-columns: 340px 1fr;
@@ -641,9 +671,9 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
     .two-col-layout { grid-template-columns: 1fr; }
 }
 
-/* ═══════════════════════════════════════
+/* ####################################
    ADMIN FORM EXTRAS
-═══════════════════════════════════════ */
+####################################### */
 .panel-body { padding: 20px 22px; }
 
 .admin-form select {
@@ -714,9 +744,9 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
 }
 .btn-admin-secondary:hover { border-color: var(--primary); color: var(--primary); }
 
-/* ═══════════════════════════════════════
+/* ####################################
    IMAGE UPLOAD AREA
-═══════════════════════════════════════ */
+####################################### */
 .image-upload-area {
     border: 2px dashed var(--border);
     border-radius: 10px;
@@ -773,9 +803,9 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
     line-height: 1;
 }
 .preview-remove:hover { background: #ef4444; }
-/* ═══════════════════════════════════════
+/* ####################################
    SIDEBAR TOGGLE (hamburger — mobile)
-═══════════════════════════════════════ */
+####################################### */
 .sidebar-toggle {
     display: none;
     background: none;
@@ -812,9 +842,9 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
     .sidebar-toggle { display: flex; }
 }
 
-/* ═══════════════════════════════════════
+/* ####################################
    NOTIFICATION BELL
-═══════════════════════════════════════ */
+####################################### */
 .notif-bell {
     position: relative;
     background: none;
