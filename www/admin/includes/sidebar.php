@@ -48,4 +48,3 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </div>
     </div>
 </aside>
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
