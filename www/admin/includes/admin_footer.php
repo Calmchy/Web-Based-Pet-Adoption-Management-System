@@ -1,6 +1,6 @@
 <script>
 (function () {
-    // Theme
+    // ############ Theme ############
     const themeBtn = document.getElementById('themeToggle');
     function applyTheme(dark) {
         document.body.classList.toggle('dark-mode', dark);
@@ -9,7 +9,7 @@
     }
     applyTheme(localStorage.getItem('adminTheme') === 'dark');
     if (themeBtn) themeBtn.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark-mode')));
-    // Sidebar toggle (mobile)
+    // ############ Sidebar toggle (mobile) ############
     const sidebarEl = document.getElementById('sidebar');
     const toggleEl = document.getElementById('sidebarToggle');
     const overlayEl = document.getElementById('sidebarOverlay');
@@ -21,7 +21,7 @@
         document.querySelectorAll('.sidebar-nav a').forEach(a => a.addEventListener('click', close));
     }
 
-    // Notification bell toggle
+    // ############ Notification bell toggle ############
     const notifBtn      = document.getElementById('adminNotifBtn');
     const notifDropdown = document.getElementById('adminNotifDropdown');
     const markAllBtn    = document.getElementById('adminMarkAllRead');
