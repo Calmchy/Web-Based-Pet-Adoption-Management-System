@@ -625,7 +625,6 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
         box-shadow: 4px 0 24px rgba(0,0,0,.3);
     }
     .admin-main { margin-left: 0; }
-    .sidebar-toggle { display: flex; }
 
     .topbar { padding: 0 14px; }
     .topbar-left p { display: none; }
@@ -647,13 +646,16 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
     .data-table th, .data-table td { padding: 9px 10px; font-size: .8rem; }
 }
 
-/* Overlay */
+/* Overlay — only covers main content, NOT the sidebar area */
 .sidebar-overlay {
     display: none;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: var(--sidebar-w); /* starts AFTER the sidebar */
+    right: 0;
+    bottom: 0;
     background: rgba(0,0,0,.5);
-    z-index: 150;
+    z-index: 195;
     backdrop-filter: blur(1px);
 }
 .sidebar-overlay.show { display: block; }
