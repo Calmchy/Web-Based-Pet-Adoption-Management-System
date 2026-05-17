@@ -15,7 +15,7 @@ $action = $_POST['action'] ?? '';
 // ── ADD ───────────────────────────────────────────────────────────────────
 if ($action === 'add') {
     $name = trim($_POST['name'] ?? '');
-    $gender = $_POST['gender'] ?? '';
+    $gender = trim($_POST['gender'] ?? '');
     $breed_id = (int)($_POST['breed_id']   ?? 0);
     $age = $_POST['age'] !== '' ? (int)$_POST['age'] : null;
     $status = $_POST['status'] ?? 'available';
@@ -44,7 +44,7 @@ if ($action === 'add') {
         INSERT INTO pets (name, age, gender, description, status, breed_id, created_by)
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
-    $stmt->bind_param("siissii", $name, $age, $gender, $description, $status, $breed_id, $created_by);
+    $stmt->bind_param("sisssii", $name, $age, $gender, $description, $status, $breed_id, $created_by);
 
     if (!$stmt->execute()) {
         $_SESSION['admin_error'] = "Failed to add pet. Please try again.";
