@@ -584,10 +584,49 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
 
 /* ─── Responsive ─────────────────────────────────────── */
 @media (max-width: 768px) {
-    .sidebar { width: 0; transform: translateX(-100%); }
+    .sidebar {
+        width: var(--sidebar-w);
+        transform: translateX(-100%);
+        transition: transform var(--transition);
+        box-shadow: none;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0,0,0,.3);
+    }
     .admin-main { margin-left: 0; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .sidebar-toggle { display: flex; }
+
+    .topbar { padding: 0 14px; }
+    .topbar-left p { display: none; }
+    .topbar-right .logout-btn { display: none; }
+
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+    .stat-card  { padding: 14px 12px; gap: 10px; }
+    .stat-icon  { width: 42px; height: 42px; font-size: 1.1rem; }
+    .stat-info h3 { font-size: 1.3rem; }
+
+    .page-content { padding: 14px; }
+    .content-grid { grid-template-columns: 1fr; }
+
+    /* Notification dropdown — keep on screen */
+    .notif-dropdown { right: -50px; width: 270px; }
+
+    /* Panel body spacing */
+    .panel-header { padding: 12px 14px 10px; }
+    .data-table th, .data-table td { padding: 9px 10px; font-size: .8rem; }
 }
+
+/* Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 150;
+    backdrop-filter: blur(1px);
+}
+.sidebar-overlay.show { display: block; }
 /* ═══════════════════════════════════════
    TWO-COLUMN LAYOUT (categories/breeds)
 ═══════════════════════════════════════ */
@@ -748,8 +787,15 @@ body.dark-mode .alert-error   { background: rgba(239,68,68,.12); color: #fca5a5;
     gap: 5px;
     flex-shrink: 0;
     transition: background var(--transition);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
-.sidebar-toggle:hover { background: var(--surface-2); }
+.sidebar-toggle:hover  { background: var(--surface-2); }
+.sidebar-toggle:focus  { outline: none; }
+.sidebar-toggle:active { background: var(--surface-2); }
 .sidebar-toggle span {
     display: block;
     width: 20px;
