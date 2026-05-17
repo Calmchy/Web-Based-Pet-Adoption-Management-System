@@ -114,8 +114,15 @@ header {
     flex-direction: column;
     gap: 5px;
     transition: background .2s;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
-.nav-hamburger:hover { background: rgba(255,255,255,.1); }
+.nav-hamburger:hover  { background: rgba(255,255,255,.1); }
+.nav-hamburger:focus  { outline: none; }
+.nav-hamburger:active { background: rgba(255,255,255,.15); }
 .nav-hamburger span {
     display: block;
     width: 22px;
