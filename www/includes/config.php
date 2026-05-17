@@ -1,6 +1,14 @@
 <?php
     session_start();
+    /*
+    // Xampp Config
+    $host = 'localhost';
+    $dbname = 'adoptme';
+    $username = 'root';
+    $password = '';
+    */
 
+    // Docker Config
     $host     = getenv('DB_HOST')     ?: 'mariadb';
     $dbname   = getenv('DB_NAME')     ?: 'adoptme';
     $username = getenv('DB_USER')     ?: 'adoptme';
