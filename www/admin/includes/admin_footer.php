@@ -1,6 +1,6 @@
 <script>
 (function () {
-    // ############ Theme ############
+    // ── Theme ────────────────────────────────────────────
     const themeBtn = document.getElementById('themeToggle');
     function applyTheme(dark) {
         document.body.classList.toggle('dark-mode', dark);
@@ -9,19 +9,45 @@
     }
     applyTheme(localStorage.getItem('adminTheme') === 'dark');
     if (themeBtn) themeBtn.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark-mode')));
-    // ############ Sidebar toggle (mobile) ############
+
+    // ── Sidebar ──────────────────────────────────────────
     const sidebarEl = document.getElementById('sidebar');
-    const toggleEl = document.getElementById('sidebarToggle');
-    const overlayEl = document.getElementById('sidebarOverlay');
-    if (toggleEl && sidebarEl) {
-        const open = () => { sidebarEl.classList.add('open'); toggleEl.classList.add('open'); if(overlayEl) overlayEl.classList.add('show'); };
-        const close = () => { sidebarEl.classList.remove('open'); toggleEl.classList.remove('open'); if(overlayEl) overlayEl.classList.remove('show'); };
-        toggleEl.addEventListener('click', () => sidebarEl.classList.contains('open') ? close() : open());
-        if (overlayEl) overlayEl.addEventListener('click', close);
-        document.querySelectorAll('.sidebar-nav a').forEach(a => a.addEventListener('click', close));
+    const toggleEl  = document.getElementById('sidebarToggle');
+
+    function openSidebar() {
+        sidebarEl.classList.add('open');
+        toggleEl.classList.add('open');
+    }
+    function closeSidebar() {
+        sidebarEl.classList.remove('open');
+        toggleEl.classList.remove('open');
     }
 
-    // ############ Notification bell toggle ############
+    if (toggleEl && sidebarEl) {
+        toggleEl.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar();
+        });
+
+        // Close when tapping anywhere OUTSIDE the sidebar
+        document.addEventListener('touchstart', function(e) {
+            if (sidebarEl.classList.contains('open') &&
+                !sidebarEl.contains(e.target) &&
+                !toggleEl.contains(e.target)) {
+                closeSidebar();
+            }
+        }, { passive: true });
+
+        document.addEventListener('click', function(e) {
+            if (sidebarEl.classList.contains('open') &&
+                !sidebarEl.contains(e.target) &&
+                !toggleEl.contains(e.target)) {
+                closeSidebar();
+            }
+        });
+    }
+
+    // ── Notifications ────────────────────────────────────
     const notifBtn      = document.getElementById('adminNotifBtn');
     const notifDropdown = document.getElementById('adminNotifDropdown');
     const markAllBtn    = document.getElementById('adminMarkAllRead');
@@ -45,7 +71,7 @@
                     document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
                     const badge = document.querySelector('.notif-badge');
                     if (badge) badge.remove();
-                    notifDropdown.classList.remove('open');
+                    if (notifDropdown) notifDropdown.classList.remove('open');
                 });
         });
     }
